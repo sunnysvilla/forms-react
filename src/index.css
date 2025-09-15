@@ -1,0 +1,14 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glass-bg {
+  background: rgba(149, 149, 149, 0.25);
+  backdrop-filter: blur(4px);
+  border: 1px solid;
+  border-color: rgba(149, 149, 149, 0.352);
+}
