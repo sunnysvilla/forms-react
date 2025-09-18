@@ -1,50 +1,51 @@
-import { Box, Button, Flex, Heading, Icon, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, Icon, Text, VStack } from "@chakra-ui/react";
 import { TbConfetti } from "react-icons/tb";
 
-const WelcomeScreen = () => {
+interface Props {
+  next: () => void;
+}
+
+const WelcomeScreen = ({ next }: Props) => {
   return (
     <Flex
       maxW="100%"
       flexDir="column"
       align="center"
       flexGrow={1}
-      justify="end"
-      borderRadius="20px"
+      justify="space-around"
       overflow="clip"
       pos="relative"
       p={6}
     >
-      <Box
-        inset={0}
-        opacity={0.9}
-        pos="absolute"
-        bg="url(https://images.unsplash.com/photo-1757418254008-1647eb0afe04?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)"
-      />
       <Flex
-        color="white"
         flexDir="column"
-        gap={2}
+        gap={8}
         w="max-content"
         maxW="100%"
-        align="center"
+        align="start"
+        justify="start"
         textAlign="left"
-        className="glass-bg"
         p={{ base: 4, md: 4 }}
         borderRadius="20px"
       >
-        <Heading w="100%">
-          Welcome to <strong>Macify!</strong>
-        </Heading>
-        <Text fontSize="sm">
+        <VStack w="100%" align="start" fontSize={{ base: "sm", md: "md" }}>
+          <Text color="gray.700"> Welcome to, </Text>
+          <Heading fontSize={{ base: "2xl", sm: "4xl", md: "4xl", lg: "5xl" }}>
+            <strong>Macify!</strong>
+          </Heading>
+        </VStack>
+
+        <Text fontSize={{ base: "sm", md: "md" }} color="gray.700">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto
           sint quia adipisci facilis consequuntur rem modi incidunt natus nobis
           molestiae.
         </Text>
+
         <Button
-          w="100%"
-          mt={2}
-          borderRadius="xl"
+          mt={4}
+          onClick={next}
           colorPalette="purple"
+          borderRadius="full"
           size={{ base: "md", md: "lg" }}
         >
           Let's Get Started!
