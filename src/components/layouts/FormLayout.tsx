@@ -8,6 +8,7 @@ import GuestDetailsInput from "../library/form/GuestDetailsInput";
 import PaymentProofInput from "../library/form/PaymentProof";
 import ProofUploadInput from "../library/form/ProofUploadInput";
 import WelcomeScreen from "../library/form/WelcomeScreen";
+import FormBg from "../library/form/FormBg";
 
 const TABS = [
   WelcomeScreen,
@@ -34,7 +35,9 @@ const FormLayout = () => {
       maxH="100vh"
       justify="center"
       align="center"
+      pos="relative"
     >
+      <FormBg />
       <Flex
         w={{ base: "100%", sm: "80%", md: "60%", lg: "50%" }}
         align="center"

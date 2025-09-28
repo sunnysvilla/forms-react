@@ -53,9 +53,8 @@ const FormContainer = ({ children, tabIndex }: Props) => {
       py={6}
       pb={0}
       gap={8}
-      bg="gray.100"
       borderRadius={40}
-      id="booking-container"
+      className="glass-bg"
     >
       <FormHeader heading={HEADINGS[tabIndex]} />
       <Flex
