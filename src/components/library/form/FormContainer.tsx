@@ -62,8 +62,7 @@ const FormContainer = ({ children, tabIndex }: Props) => {
         gap={6}
         w="100%"
         maxW="100%"
-        align="start"
-        justify="start"
+        justify="center"
         textAlign="left"
         p={{ base: 12, md: 8 }}
         borderRadius="20px"

@@ -11,7 +11,7 @@ interface Props {
 
 const FormFooter = ({ tab, prev, next, final }: Props) => {
   return (
-    <HStack w="100%" justify="end" gap={4} mt={8}>
+    <HStack w="100%" justify="center" gap={4} mt={8}>
       {tab === 0 && (
         <Button
           colorPalette="purple"

@@ -8,7 +8,7 @@
 
 .glass-bg {
   background: white;
-  box-shadow: 0 0 0 4px #ffffff3d;
+  box-shadow: 0 0 0 4px hsla(0, 0%, 100%, 0.186);
 }
 
 #booking-header {
@@ -18,10 +18,18 @@
 }
 
 #booking-form {
-  background-image: linear-gradient(135deg, #5b6fc7 0%, #4f2975 100%);
+  background-image: linear-gradient(135deg, #010e4a 0%, #4f2975 100%);
 }
 
 #booking-container {
   background: white;
   /* background-image: linear-gradient(0deg, #fdfbfb 0%, #cdcdcd 100%); */
+}
+
+.box-input:hover img.input-img {
+  bottom: -16px;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

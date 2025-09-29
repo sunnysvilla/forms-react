@@ -1,23 +1,12 @@
 import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
-import CheckInInput from "../library/form/CheckInInput";
 import FormContainer from "../library/form/FormContainer";
 import FormFooter from "../library/form/FormFooter";
 import GuestCountInput from "../library/form/GuestCountInput";
-import GuestDetailsInput from "../library/form/GuestDetailsInput";
-import PaymentProofInput from "../library/form/PaymentProof";
 import ProofUploadInput from "../library/form/ProofUploadInput";
 import WelcomeScreen from "../library/form/WelcomeScreen";
-import FormBg from "../library/form/FormBg";
 
-const TABS = [
-  WelcomeScreen,
-  GuestCountInput,
-  ProofUploadInput,
-  GuestDetailsInput,
-  CheckInInput,
-  PaymentProofInput,
-];
+const TABS = [WelcomeScreen, GuestCountInput, ProofUploadInput];
 
 const FormLayout = () => {
   const [tab, setTab] = useState(0);
@@ -31,13 +20,14 @@ const FormLayout = () => {
     <Flex
       id="booking-form"
       w="100%"
+      maxW="100%"
+      overflowX="clip"
       minH="100vh"
       maxH="100vh"
       justify="center"
       align="center"
       pos="relative"
     >
-      <FormBg />
       <Flex
         w={{ base: "100%", sm: "80%", md: "60%", lg: "50%" }}
         align="center"

@@ -1,21 +1,34 @@
-import { Field, Input, VStack } from "@chakra-ui/react";
+import { SimpleGrid, VStack } from "@chakra-ui/react";
+import BoxInput from "../../utils/Input/BoxInput";
 
 const GuestCountInput = () => {
   return (
-    <VStack gap={4} w="100%">
-      <Field.Root required>
-        <Field.Label>
-          Guest Count <Field.RequiredIndicator />
-        </Field.Label>
-        <Input
-          placeholder="Guest count"
-          borderRadius="2xl"
-          colorPalette="purple"
-          size={{ base: "lg", md: "xl" }}
-          variant="subtle"
+    <SimpleGrid columns={{ base: 1, md: 2 }} w="100%" gap={4}>
+      <VStack gap={4} w="100%">
+        <BoxInput
+          label="Name"
+          filled
+          bgImg="https://img.icons8.com/?size=100&id=kPeBecos1GOu&format=png&color=000000"
         />
-      </Field.Root>
-    </VStack>
+        <BoxInput
+          label="Guest Count"
+          placeholder="Ex. 5"
+          bgImg="https://img.icons8.com/?size=100&id=WEaZHxccFm5x&format=png&color=000000"
+        />
+      </VStack>
+      <VStack gap={4} w="100%">
+        <BoxInput
+          label="Phone"
+          placeholder="Phone"
+          bgImg="https://img.icons8.com/?size=100&id=5XxqJLUsepb2&format=png&color=000000"
+        />
+        <BoxInput
+          label="Check In Time"
+          placeholder="Enter CheckIn"
+          bgImg="https://img.icons8.com/?size=100&id=wOOmdWtwVs0A&format=png&color=000000"
+        />
+      </VStack>
+    </SimpleGrid>
   );
 };
 
