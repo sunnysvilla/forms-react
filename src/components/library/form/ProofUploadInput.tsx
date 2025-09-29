@@ -6,6 +6,7 @@ import ProofSlider from "./ProofSlider";
 const ProofUploadInput = () => {
   return (
     <BoxInput
+      name="proof"
       label="Check In Time"
       placeholder="Phone"
       extraButton={<Uploader />}

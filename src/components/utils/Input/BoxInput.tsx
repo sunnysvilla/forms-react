@@ -1,25 +1,32 @@
 import { Circle, Field, HStack, Image, Input } from "@chakra-ui/react";
+import { useField } from "formik";
 import { useRef, useState, type ReactNode } from "react";
 
 interface Props {
   label: string;
+  name: string;
   placeholder?: string;
   children?: ReactNode | ReactNode[];
   extraButton?: ReactNode;
-  filled?: boolean;
   bgImg?: string;
 }
 
 const BoxInput = ({
   placeholder,
+  name,
   label,
   children,
   extraButton,
-  filled = false,
   bgImg,
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [field, meta] = useField(name);
+
+  const isError = meta.touched && meta.error;
+  const isValid = meta.touched && meta.value;
+
+  const activeColor = isError ? "red" : isValid ? "green" : "gray";
 
   return (
     <Field.Root
@@ -27,12 +34,12 @@ const BoxInput = ({
       p={4}
       gap={4}
       borderRadius="2xl"
-      bg="gray.subtle"
+      bg={`${activeColor}.50`}
       display="flex"
       required
       justifyContent="space-between"
       border="1px solid"
-      borderColor="gray.muted"
+      borderColor={`${activeColor}.100`}
       onClick={() => inputRef.current?.focus()}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}
@@ -52,16 +59,20 @@ const BoxInput = ({
         transition="all 0.7s"
       />
       <HStack w="100%" justify="space-between">
-        <Field.Label fontWeight="medium" color="gray.400" fontSize="sm">
-          {label}
+        <Field.Label
+          fontWeight="medium"
+          color={`${activeColor}.500`}
+          fontSize="sm"
+        >
+          {isError ? meta.error : label}
         </Field.Label>
         {extraButton || (
           <HStack gap={1}>
-            <Circle w={1} h={1} bg={filled ? "green.400" : "gray.300"} />
-            {isActive && (
+            <Circle w={1} h={1} bg={`${activeColor}.400`} />
+            {isActive && !isError && (
               <>
-                <Circle w={1} h={1} bg={filled ? "green.400" : "gray.300"} />
-                <Circle w={1} h={1} bg={filled ? "green.400" : "gray.300"} />
+                <Circle w={1} h={1} bg={`${activeColor}.400`} />
+                <Circle w={1} h={1} bg={`${activeColor}.400`} />
               </>
             )}
           </HStack>
@@ -71,9 +82,10 @@ const BoxInput = ({
 
       {children || (
         <Input
+          {...field}
           ref={inputRef}
           placeholder={placeholder || `Enter ${label}`}
-          // size={{ base: "lg", md: "2xl" }}
+          bg={`${activeColor}.50`}
           variant="subtle"
           px={0}
           border="none"
