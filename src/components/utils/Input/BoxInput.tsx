@@ -9,6 +9,10 @@ interface Props {
   children?: ReactNode | ReactNode[];
   extraButton?: ReactNode;
   bgImg?: string;
+  onTapValue?: string;
+  viewOnly?: boolean;
+  disabledInput?: boolean;
+  type?: React.HTMLInputTypeAttribute;
 }
 
 const BoxInput = ({
@@ -18,15 +22,24 @@ const BoxInput = ({
   children,
   extraButton,
   bgImg,
+  onTapValue,
+  disabledInput = false,
+  type = "text",
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [field, meta] = useField(name);
+  const [field, meta, helpers] = useField(name);
 
   const isError = meta.touched && meta.error;
   const isValid = meta.touched && meta.value;
 
   const activeColor = isError ? "red" : isValid ? "green" : "gray";
+
+  const handleTap = () => {
+    inputRef.current?.focus();
+
+    if (onTapValue) helpers.setValue(onTapValue);
+  };
 
   return (
     <Field.Root
@@ -40,7 +53,7 @@ const BoxInput = ({
       justifyContent="space-between"
       border="1px solid"
       borderColor={`${activeColor}.100`}
-      onClick={() => inputRef.current?.focus()}
+      onClick={handleTap}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}
       pos="relative"
@@ -50,7 +63,7 @@ const BoxInput = ({
       <Image
         className="input-img"
         pos="absolute"
-        zIndex={1}
+        zIndex={0}
         bottom={-20}
         right={-4}
         opacity={0.7}
@@ -83,9 +96,11 @@ const BoxInput = ({
       {children || (
         <Input
           {...field}
+          type={type}
           ref={inputRef}
+          disabled={disabledInput}
+          bg="transparent"
           placeholder={placeholder || `Enter ${label}`}
-          bg={`${activeColor}.50`}
           variant="subtle"
           px={0}
           border="none"

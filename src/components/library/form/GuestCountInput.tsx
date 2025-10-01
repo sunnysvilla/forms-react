@@ -1,5 +1,6 @@
 import { SimpleGrid, VStack } from "@chakra-ui/react";
 import BoxInput from "../../utils/Input/BoxInput";
+import DatePicker from "../../utils/Input/DatePicker";
 
 const GuestCountInput = () => {
   return (
@@ -14,6 +15,7 @@ const GuestCountInput = () => {
           name="guestCount"
           label="Guest Count"
           placeholder="Ex. 5"
+          type="number"
           bgImg="https://img.icons8.com/?size=100&id=WEaZHxccFm5x&format=png&color=000000"
         />
       </VStack>
@@ -22,6 +24,7 @@ const GuestCountInput = () => {
           name="phone"
           label="Phone"
           placeholder="Phone"
+          type="number"
           bgImg="https://img.icons8.com/?size=100&id=5XxqJLUsepb2&format=png&color=000000"
         />
         <BoxInput
@@ -29,7 +32,9 @@ const GuestCountInput = () => {
           label="Check In Time"
           placeholder="Enter CheckIn"
           bgImg="https://img.icons8.com/?size=100&id=wOOmdWtwVs0A&format=png&color=000000"
-        />
+        >
+          <DatePicker />
+        </BoxInput>
       </VStack>
     </SimpleGrid>
   );
