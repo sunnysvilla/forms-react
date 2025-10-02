@@ -1,7 +1,21 @@
 import { Box, HStack, Icon } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 import { LuX } from "react-icons/lu";
 
-const ProofCard = () => {
+interface CardProps {
+  file: File;
+  onDelete: (file: File) => void;
+}
+
+const ProofCard = ({ file, onDelete }: CardProps) => {
+  const [preview, setPreview] = useState<string>("");
+
+  useEffect(() => {
+    const blobUrl = URL.createObjectURL(file);
+    setPreview(blobUrl);
+    return () => URL.revokeObjectURL(blobUrl);
+  }, [file]);
+
   return (
     <Box
       w={200}
@@ -9,10 +23,10 @@ const ProofCard = () => {
       h={180}
       p={4}
       borderRadius="xl"
-      border="sm"
-      borderColor="blue.100"
-      bg="blue.50"
       pos="relative"
+      bgImage={`url(${preview})`}
+      bgSize="cover"
+      bgPos="center"
     >
       <Box
         p={1}
@@ -23,6 +37,8 @@ const ProofCard = () => {
         lineHeight={0}
         w="max"
         borderRadius="full"
+        cursor="pointer"
+        onClick={() => onDelete(file)}
       >
         <Icon as={LuX} size="xs" />
       </Box>
@@ -30,15 +46,17 @@ const ProofCard = () => {
   );
 };
 
-const ProofSlider = () => {
+interface Props {
+  files: File[];
+  onDelete: (file: File) => void;
+}
+
+const ProofSlider = ({ files, onDelete }: Props) => {
   return (
     <HStack w="100%" maxW="100%" overflowX="auto" minH="max" borderRadius="xl">
-      <ProofCard />
-      <ProofCard />
-      <ProofCard />
-      <ProofCard />
-      <ProofCard />
-      <ProofCard />
+      {files.map((file) => (
+        <ProofCard key={file.name} file={file} onDelete={onDelete} />
+      ))}
     </HStack>
   );
 };

@@ -1,9 +1,22 @@
 import { Button, FileUpload } from "@chakra-ui/react";
+import { useFormikContext } from "formik";
 import { HiUpload } from "react-icons/hi";
+import { type BookingFormValues } from "../../config/bookingFormConfig";
 
-const Uploader = () => {
+export interface UploadProps {
+  max?: number;
+}
+
+const Uploader = ({ max = 1 }: UploadProps) => {
+  const { setFieldValue } = useFormikContext<BookingFormValues>();
+
   return (
-    <FileUpload.Root accept={["image/png"]} w="max" maxFiles={5}>
+    <FileUpload.Root
+      accept={["image/png"]}
+      w="max"
+      maxFiles={max}
+      onFileAccept={(details) => setFieldValue("proof", details.files)}
+    >
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>
         <Button
@@ -15,7 +28,6 @@ const Uploader = () => {
           <HiUpload /> Upload file
         </Button>
       </FileUpload.Trigger>
-      <FileUpload.List />
     </FileUpload.Root>
   );
 };

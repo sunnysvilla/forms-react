@@ -10,11 +10,13 @@ import {
   bookingValidation,
   initialBookingValues,
 } from "../config/bookingFormConfig";
+import ErrorModal from "../library/form/ErrorModal";
 
 const TABS = [WelcomeScreen, GuestCountInput, ProofUploadInput];
 
 const FormLayout = () => {
   const [tab, setTab] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const next = () =>
     setTab((prev) => (prev < TABS.length - 1 ? prev + 1 : prev));
@@ -59,6 +61,7 @@ const FormLayout = () => {
               </FormContainer>
             </Flex>
           </Flex>
+          <ErrorModal open={open} setOpen={setOpen} />
         </Form>
       )}
     </Formik>

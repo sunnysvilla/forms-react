@@ -36,16 +36,32 @@ const FormFooter = ({ tab, prev, next, final }: Props) => {
           >
             <LuCircleChevronLeft />
           </IconButton>
-          <Button
-            borderRadius="full"
-            onClick={next}
-            colorPalette="purple"
-            size={{ base: "sm", md: "md" }}
-            px={6}
-          >
-            {final ? "Finish Booking" : "Next"}
-            <Icon as={LuCircleChevronRight} />
-          </Button>
+
+          {!final && (
+            <Button
+              borderRadius="full"
+              onClick={next}
+              colorPalette="purple"
+              size={{ base: "sm", md: "md" }}
+              px={6}
+            >
+              Next
+              <Icon as={LuCircleChevronRight} />
+            </Button>
+          )}
+
+          {final && (
+            <Button
+              borderRadius="full"
+              colorPalette="purple"
+              size={{ base: "sm", md: "md" }}
+              px={6}
+              type="submit"
+            >
+              Finish Booking
+              <Icon as={LuCircleChevronRight} />
+            </Button>
+          )}
         </>
       )}
     </HStack>
