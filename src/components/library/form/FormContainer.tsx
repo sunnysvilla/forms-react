@@ -7,39 +7,7 @@ interface Props {
   tabIndex: number;
 }
 
-const HEADINGS = [
-  {
-    tag: "Welcome to,",
-    title: "Macify",
-    subtitle: "Let's simply bookings!",
-  },
-  {
-    title: "The homies count!",
-    subtitle: "You can always come back and add or remove your homies :)",
-  },
-  {
-    tag: "Alright now,",
-    title: "Upload the proofs",
-    subtitle: "The proof stays confidential between us",
-  },
-  {
-    tag: "We are waiting, now please",
-    title: "Enter the details",
-    subtitle: "Again, no sharing :)",
-  },
-  {
-    tag: "When are you planning to",
-    title: "CheckIn?",
-    subtitle: "",
-  },
-  {
-    tag: "Everything's fine, one last step",
-    title: "Payment Proof",
-    subtitle: "We would appreciate so much! :)",
-  },
-];
-
-const FormContainer = ({ children, tabIndex }: Props) => {
+const FormContainer = ({ children }: Props) => {
   return (
     <Flex
       w="100%"
@@ -56,10 +24,10 @@ const FormContainer = ({ children, tabIndex }: Props) => {
       borderRadius={40}
       className="glass-bg"
     >
-      <FormHeader heading={HEADINGS[tabIndex]} />
+      <FormHeader />
       <Flex
         flexDir="column"
-        gap={6}
+        gap={8}
         w="100%"
         maxW="100%"
         justify="center"

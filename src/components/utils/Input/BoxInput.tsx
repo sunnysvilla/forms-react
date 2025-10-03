@@ -45,7 +45,7 @@ const BoxInput = ({
     <Field.Root
       w="100%"
       p={4}
-      gap={4}
+      gap={2}
       borderRadius="2xl"
       bg={`${activeColor}.50`}
       display="flex"

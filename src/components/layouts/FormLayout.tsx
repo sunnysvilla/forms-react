@@ -5,14 +5,39 @@ import FormContainer from "../library/form/FormContainer";
 import FormFooter from "../library/form/FormFooter";
 import GuestCountInput from "../library/form/GuestCountInput";
 import ProofUploadInput from "../library/form/ProofUploadInput";
-import WelcomeScreen from "../library/form/WelcomeScreen";
 import {
   bookingValidation,
   initialBookingValues,
 } from "../config/bookingFormConfig";
+import WelcomeScreen from "../library/form/WelcomeScreen";
 import ErrorModal from "../library/form/ErrorModal";
+import GuestDetailsInput from "../library/form/GuestDetailsInput";
+import FormTitle from "../library/form/FormTitle";
 
-const TABS = [WelcomeScreen, GuestCountInput, ProofUploadInput];
+const TABS = [
+  WelcomeScreen,
+  GuestDetailsInput,
+  GuestCountInput,
+  ProofUploadInput,
+];
+const TAB_HEADINGS = [
+  {
+    title: "",
+    subtitle: "",
+  },
+  {
+    title: "Enter Details",
+    subtitle: "Please enter basic details",
+  },
+  {
+    title: "Arrival Details",
+    subtitle: "Please enter arrival details",
+  },
+  {
+    title: "Upload Proof",
+    subtitle: "Please upload proof of identification",
+  },
+];
 
 const FormLayout = () => {
   const [tab, setTab] = useState(0);
@@ -45,12 +70,13 @@ const FormLayout = () => {
             pos="relative"
           >
             <Flex
-              w={{ base: "100%", sm: "80%", md: "60%", lg: "50%" }}
+              w={{ base: "100%", sm: "80%", md: "60%", lg: "45%" }}
               align="center"
               justify="center"
               flexDir="column"
             >
               <FormContainer tabIndex={tab}>
+                <FormTitle {...TAB_HEADINGS[tab]} />
                 <ActiveTab />
                 <FormFooter
                   tab={tab}
