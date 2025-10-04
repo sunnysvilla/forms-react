@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import Header from "../utils/Typo/Heading";
 import { Label } from "../utils/Typo/Label";
@@ -7,9 +7,10 @@ interface Props {
   title: string;
   subtitle: string;
   children: ReactNode | ReactNode[];
+  action: ReactNode | ReactNode[];
 }
 
-const AdminContentLayout = ({ title, subtitle, children }: Props) => {
+const AdminContentLayout = ({ title, subtitle, children, action }: Props) => {
   return (
     <VStack
       w="100%"
@@ -22,10 +23,13 @@ const AdminContentLayout = ({ title, subtitle, children }: Props) => {
       p={{ base: 4, md: 8 }}
       gap={8}
     >
-      <VStack w="100%" align="start" gap={0}>
-        <Header level="h4"> {title} </Header>
-        <Label> {subtitle} </Label>
-      </VStack>
+      <HStack w="100%" justify="space-between">
+        <VStack align="start" gap={0}>
+          <Header level="h4"> {title} </Header>
+          <Label> {subtitle} </Label>
+        </VStack>
+        {action}
+      </HStack>
       {children}
     </VStack>
   );

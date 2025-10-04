@@ -1,37 +1,40 @@
 import {
-  Button,
   ButtonGroup,
-  Heading,
   IconButton,
   Pagination,
   Stack,
   Table,
 } from "@chakra-ui/react";
+import { format } from "date-fns";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import ViewDocsBtn from "./ViewDocsBtn";
 
 const KYCTable = () => {
   return (
     <Stack width="full" gap="5">
-      <Heading size="xl">Products</Heading>
-      <Table.Root size="sm" variant="outline" striped>
+      <Table.Root size="sm" variant="outline" striped borderRadius="xl">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeader>Name</Table.ColumnHeader>
-            <Table.ColumnHeader>Guest Count</Table.ColumnHeader>
-            <Table.ColumnHeader>Contact</Table.ColumnHeader>
-            <Table.ColumnHeader>Arrival</Table.ColumnHeader>
-            <Table.ColumnHeader>Document</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">
+              Guest Count
+            </Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">Contact</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">Arrival</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">Document</Table.ColumnHeader>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {items.map((item) => (
             <Table.Row key={item._id}>
               <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.guests}</Table.Cell>
-              <Table.Cell>{item.phone}</Table.Cell>
-              <Table.Cell>{item.arrival}</Table.Cell>
-              <Table.Cell>
-                <Button> View Docs </Button>
+              <Table.Cell textAlign="center">{item.guests}</Table.Cell>
+              <Table.Cell textAlign="center">{item.phone}</Table.Cell>
+              <Table.Cell textAlign="center">
+                {format(new Date(item.arrival), "dd/MM/yy hh:mm a")}
+              </Table.Cell>
+              <Table.Cell textAlign="center">
+                <ViewDocsBtn docs={item.ids} />
               </Table.Cell>
             </Table.Row>
           ))}
@@ -77,7 +80,7 @@ const items = [
       "https://drive.google.com/file/d/1bjqGHKUV8gtlfPPWdSCLXfzHRaIt6YD-/view?usp=drivesdk",
       "https://drive.google.com/file/d/1p9AO7qoUCQx22lhRErmIDbcLbjYzh6IG/view?usp=drivesdk",
     ],
-    arrival: "2025-09-27T00:00:00.000Z",
+    arrival: "2025-09-27T23:10:00.000Z",
     property: "68d7f2d778bb1b5f57229098",
     __v: 0,
   },

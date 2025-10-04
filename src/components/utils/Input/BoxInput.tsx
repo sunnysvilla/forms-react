@@ -5,6 +5,7 @@ import { useRef, useState, type ReactNode } from "react";
 interface Props {
   label: string;
   name: string;
+  size?: "sm" | "md";
   placeholder?: string;
   children?: ReactNode | ReactNode[];
   extraButton?: ReactNode;
@@ -24,6 +25,7 @@ const BoxInput = ({
   bgImg,
   onTapValue,
   disabledInput = false,
+  size = "md",
   type = "text",
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +33,7 @@ const BoxInput = ({
   const [field, meta, helpers] = useField(name);
 
   const isError = meta.touched && meta.error;
-  const isValid = meta.touched && meta.value;
+  const isValid = !!meta.value;
 
   const activeColor = isError ? "red" : isValid ? "green" : "gray";
 
@@ -44,8 +46,9 @@ const BoxInput = ({
   return (
     <Field.Root
       w="100%"
-      p={4}
-      gap={2}
+      px={4}
+      py={size == "sm" ? 2 : 4}
+      gap={size == "sm" ? 1 : 2}
       borderRadius="2xl"
       bg={`${activeColor}.50`}
       display="flex"
@@ -107,7 +110,9 @@ const BoxInput = ({
           outline="none"
           autoComplete="off"
           fontWeight="medium"
-          fontSize={{ base: "md", md: "lg" }}
+          fontSize={
+            size === "sm" ? { base: "sm", md: "md" } : { base: "md", md: "lg" }
+          }
         />
       )}
     </Field.Root>

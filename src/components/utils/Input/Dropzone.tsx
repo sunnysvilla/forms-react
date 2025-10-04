@@ -4,7 +4,7 @@ import type { UploadProps } from "./Uploader";
 import { useFormikContext } from "formik";
 import type { BookingFormValues } from "../../config/bookingFormConfig";
 
-const Dropzone = ({ max = 1 }: UploadProps) => {
+const Dropzone = ({ max = 1, field }: UploadProps) => {
   const { setFieldValue } = useFormikContext<BookingFormValues>();
 
   return (
@@ -12,7 +12,7 @@ const Dropzone = ({ max = 1 }: UploadProps) => {
       maxW="full"
       alignItems="stretch"
       maxFiles={max}
-      onFileAccept={(details) => setFieldValue("proof", details.files)}
+      onFileAccept={(details) => setFieldValue(field, details.files)}
     >
       <FileUpload.HiddenInput />
       <FileUpload.Dropzone minH={40} borderRadius="2xl">

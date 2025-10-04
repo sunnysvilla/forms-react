@@ -4,10 +4,11 @@ import { HiUpload } from "react-icons/hi";
 import { type BookingFormValues } from "../../config/bookingFormConfig";
 
 export interface UploadProps {
+  field: string;
   max?: number;
 }
 
-const Uploader = ({ max = 1 }: UploadProps) => {
+const Uploader = ({ field, max = 1 }: UploadProps) => {
   const { setFieldValue } = useFormikContext<BookingFormValues>();
 
   return (
@@ -15,7 +16,7 @@ const Uploader = ({ max = 1 }: UploadProps) => {
       accept={["image/png"]}
       w="max"
       maxFiles={max}
-      onFileAccept={(details) => setFieldValue("proof", details.files)}
+      onFileAccept={(details) => setFieldValue(field, details.files)}
     >
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>

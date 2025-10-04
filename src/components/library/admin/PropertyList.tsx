@@ -1,16 +1,12 @@
-import {
-  Button,
-  HStack,
-  Icon,
-  IconButton,
-  SimpleGrid,
-  VStack,
-} from "@chakra-ui/react";
-import { Label } from "../../utils/Typo/Label";
-import { LuFileArchive, LuPencil, LuTrash2 } from "react-icons/lu";
+import { HStack, Icon, IconButton, SimpleGrid, VStack } from "@chakra-ui/react";
+import { LuFileArchive, LuTrash2 } from "react-icons/lu";
 import Caption from "../../utils/Typo/Caption";
+import { Label } from "../../utils/Typo/Label";
+import AddPropertyBtn from "../actionButtons/AddPropertyBtn";
+import type { Property } from "../../entities/property";
+import { useAdminGetProperty } from "../../hooks/admin/useProperty";
 
-const PropertyEntry = ({ no }: { no: number }) => {
+const PropertyEntry = ({ property }: { property: Property }) => {
   return (
     <VStack
       w="100%"
@@ -23,21 +19,12 @@ const PropertyEntry = ({ no }: { no: number }) => {
       align="start"
     >
       <VStack align="start" gap={0} flex={1}>
-        <Caption> Property Name {no} </Caption>
-        <Label color="gray"> propertyname{no}@gmail.com </Label>
+        <Caption> {property.name} </Caption>
+        <Label color="gray"> {property.mail} </Label>
       </VStack>
 
       <HStack w="100%">
-        <Button
-          size="sm"
-          borderRadius="xl"
-          colorPalette="blue"
-          variant="subtle"
-          flex={1}
-        >
-          <Icon as={LuPencil} />
-          Edit
-        </Button>
+        <AddPropertyBtn edit values={property} />
         <IconButton
           size="sm"
           borderRadius="xl"
@@ -60,11 +47,28 @@ const PropertyEntry = ({ no }: { no: number }) => {
 };
 
 const PropertyList = () => {
+  const properties = [
+    {
+      _id: "68d7f2d778bb1b5f57229098",
+      name: "Cozy Haven Sunny",
+      link: "https://sunnysgroup.com/cozy-haven-sunny",
+      slug: "cozy-haven-sunny",
+      mail: "booking@sunnysvilla.com",
+      docs: [],
+      createdAt: "2025-09-27T14:21:11.461Z",
+    },
+  ];
+
+  // const {} = useAdminGetProperty();
+
   return (
     <SimpleGrid w="100%" gap={4} columns={{ base: 1, sm: 2, md: 2, lg: 3 }}>
-      {Array.from({ length: 4 }).map((_, i) => (
-        <PropertyEntry key={i} no={i + 1} />
+      {properties.map((property) => (
+        <PropertyEntry key={property._id} property={property} />
       ))}
+      {/* {data?.data.data.map((property) => (
+        <PropertyEntry key={property._id} property={property} />
+      ))} */}
     </SimpleGrid>
   );
 };

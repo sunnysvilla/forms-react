@@ -24,7 +24,7 @@ const ProofUploadInput = () => {
     <BoxInput
       name="proof"
       label="Upload Proof"
-      extraButton={<Uploader max={guestCount} />}
+      extraButton={<Uploader max={guestCount} field="proof" />}
       children={
         proof.length > 0 ? (
           <ProofSlider
@@ -32,7 +32,7 @@ const ProofUploadInput = () => {
             onDelete={handleDelete}
           />
         ) : (
-          <Dropzone max={guestCount} />
+          <Dropzone max={guestCount} field="proof" />
         )
       }
     />

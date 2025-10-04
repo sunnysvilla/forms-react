@@ -36,3 +36,16 @@ export type ErrorResponse = AxiosError<Error>;
 export type ExpertLoginResponse = AxiosResponse<ExpertLogin>;
 export type TokenResponse = AxiosResponse<Token>;
 export type CallCreationResponse = AxiosResponse<SuccessCall>;
+
+export interface PaginatedResponse<T> {
+  docs: T[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: number | null;
+  nextPage: number;
+}
