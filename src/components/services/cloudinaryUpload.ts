@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import CloudinaryResponse from "../entities/cloudinaryResponse";
+import axios, { type AxiosResponse } from "axios";
+import type CloudinaryResponse from "../entities/cloudinaryResponse";
 
 const cloudinaryUpload = async (
   images: File[],
