@@ -6,12 +6,15 @@
   ],
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext",
+    "module": "esnext",
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "lib": ["dom", "esnext"],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <FormLayout />,
   },
   {
-    path: "/admin/login",
+    path: "/login",
     element: <LoginPage />,
   },
   {

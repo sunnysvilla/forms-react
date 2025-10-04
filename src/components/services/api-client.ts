@@ -97,8 +97,8 @@ export default class APIClient<T> {
         "Content-Type": "multipart/form-data",
       },
       onUploadProgress: (event) => {
-        if (onProgress) {
-          const progress = Math.round((event.loaded * 100) / event.total!);
+        if (onProgress && event.total) {
+          const progress = Math.round((event.loaded * 100) / event.total);
           onProgress(progress);
         }
       },
@@ -115,9 +115,9 @@ export default class APIClient<T> {
         Authorization: this.getToken(),
       },
       onDownloadProgress: (event) => {
-        if (setProgress) {
+        if (setProgress && event.total) {
           const percentCompleted = Math.round(
-            (event.loaded * 100) / event.total!
+            (event.loaded * 100) / event.total
           );
           setProgress(percentCompleted);
         }
@@ -136,9 +136,7 @@ export default class APIClient<T> {
   };
 
   openPost = async (data?: T) => {
-    return instance.post(this.endpoint, data).then((res) => {
-      return res;
-    });
+    return instance.post(this.endpoint, data).then((res) => res);
   };
 
   put = (data?: T, params?: AxiosRequestConfig) => {

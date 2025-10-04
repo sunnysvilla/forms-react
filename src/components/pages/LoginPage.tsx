@@ -1,23 +1,31 @@
-import { VStack, HStack, Box } from "@chakra-ui/react";
+import { VStack, HStack, Box, Button } from "@chakra-ui/react";
 import { Label } from "../utils/Typo/Label";
-import AdminLoginButton from "../library/admin/AdminLoginBtn";
 import BoxInput from "../utils/Input/BoxInput";
 import PageMiddleLayout from "../layouts/PageMiddleLayout";
 import { Form, Formik } from "formik";
-import { loginInitialValues } from "../config/adminAuthConfig";
+import { loginInitialValues, loginValidation } from "../config/adminAuthConfig";
 import Header from "../utils/Typo/Heading";
+import { useAdminLogin } from "../hooks/admin/useAdminAuth";
 
 const LoginPage = () => {
+  const { mutate: login, isPending } = useAdminLogin();
+
   return (
     <Formik
       initialValues={loginInitialValues}
-      //   validationSchema={bookingValidation}
-      onSubmit={(values) => {
-        console.log("Form submitted:", values);
-      }}
+      validationSchema={loginValidation}
+      onSubmit={login}
     >
-      {() => (
-        <Form style={{ width: "100%" }}>
+      {({ handleSubmit }) => (
+        <Form
+          style={{ width: "100%" }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
+        >
           <PageMiddleLayout>
             <VStack
               w={{ base: "80%", md: "50%", lg: "40%" }}
@@ -32,10 +40,27 @@ const LoginPage = () => {
                 <Header level="h4">Welcome Back</Header>
               </VStack>
 
-              <VStack w="100%" gap={6} mt={8}>
-                <BoxInput name="email" label="Email" />
-                <BoxInput name="password" label="Password" />
-                <AdminLoginButton email="{detail}" password="{password}" />
+              <VStack w="100%" mt={4}>
+                <BoxInput name="email" label="Email" size="sm" />
+                <BoxInput
+                  name="password"
+                  label="Password"
+                  size="sm"
+                  type="password"
+                />
+                <Button
+                  w="100%"
+                  mt={4}
+                  borderRadius="xl"
+                  loadingText="Logging In"
+                  colorPalette="purple"
+                  size={{ base: "sm", md: "md" }}
+                  loading={isPending}
+                  type="submit"
+                  px={6}
+                >
+                  Login
+                </Button>
               </VStack>
             </VStack>
           </PageMiddleLayout>

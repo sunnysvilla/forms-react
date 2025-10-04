@@ -47,28 +47,28 @@ const PropertyEntry = ({ property }: { property: Property }) => {
 };
 
 const PropertyList = () => {
-  const properties = [
-    {
-      _id: "68d7f2d778bb1b5f57229098",
-      name: "Cozy Haven Sunny",
-      link: "https://sunnysgroup.com/cozy-haven-sunny",
-      slug: "cozy-haven-sunny",
-      mail: "booking@sunnysvilla.com",
-      docs: [],
-      createdAt: "2025-09-27T14:21:11.461Z",
-    },
-  ];
+  // const properties = [
+  //   {
+  //     _id: "68d7f2d778bb1b5f57229098",
+  //     name: "Cozy Haven Sunny",
+  //     link: "https://sunnysgroup.com/cozy-haven-sunny",
+  //     slug: "cozy-haven-sunny",
+  //     mail: "booking@sunnysvilla.com",
+  //     docs: [],
+  //     createdAt: "2025-09-27T14:21:11.461Z",
+  //   },
+  // ];
 
-  // const {} = useAdminGetProperty();
+  const { data } = useAdminGetProperty();
 
   return (
     <SimpleGrid w="100%" gap={4} columns={{ base: 1, sm: 2, md: 2, lg: 3 }}>
-      {properties.map((property) => (
-        <PropertyEntry key={property._id} property={property} />
-      ))}
-      {/* {data?.data.data.map((property) => (
+      {/* {properties.map((property) => (
         <PropertyEntry key={property._id} property={property} />
       ))} */}
+      {data?.data.data.map((property) => (
+        <PropertyEntry key={property._id} property={property} />
+      ))}
     </SimpleGrid>
   );
 };

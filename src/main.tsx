@@ -9,12 +9,14 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import client from "./components/router/queryClient";
 import "./index.css";
+import { Toaster } from "./components/ui/toaster";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider defaultTheme="light">
       <QueryClientProvider client={client}>
         <RouterProvider router={router} />
+        <Toaster />
       </QueryClientProvider>
     </Provider>
   </StrictMode>

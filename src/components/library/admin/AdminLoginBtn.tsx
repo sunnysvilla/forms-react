@@ -1,23 +1,17 @@
 import { useEffect } from "react";
-import { useAdminLogin } from "../../hooks/admin/useAdminAuth";
 import { Button } from "@chakra-ui/react/button";
 
 interface Props {
   email: string;
   password: string;
+  loading: boolean;
 }
 
-const AdminLoginButton = ({ email, password }: Props) => {
-  const { mutate, isPending } = useAdminLogin();
-
+const AdminLoginButton = ({ email, password, loading }: Props) => {
   useEffect(() => {
     const handleKeyDown = (k: KeyboardEvent) => {
       if (k.code === "Enter") {
-        if (email && password)
-          mutate({
-            email,
-            password,
-          });
+        if (email && password) console.log("first");
       }
     };
 
@@ -26,18 +20,18 @@ const AdminLoginButton = ({ email, password }: Props) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [email, password, mutate]);
+  }, [email, password]);
 
   return (
     <Button
-      className="no"
       w="100%"
-      borderRadius="full"
+      mt={4}
+      borderRadius="xl"
       loadingText="Logging In"
       colorPalette="purple"
       size={{ base: "sm", md: "md" }}
       disabled={!email || !password}
-      loading={isPending}
+      loading={loading}
       type="submit"
       px={6}
     >

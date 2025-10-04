@@ -8,8 +8,12 @@ import {
 import { format } from "date-fns";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import ViewDocsBtn from "./ViewDocsBtn";
+import { useAdminGetKYCs } from "../../hooks/admin/useKyc";
 
 const KYCTable = () => {
+  const { data } = useAdminGetKYCs();
+  console.log(data);
+
   return (
     <Stack width="full" gap="5">
       <Table.Root size="sm" variant="outline" striped borderRadius="xl">
@@ -25,19 +29,21 @@ const KYCTable = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {items.map((item) => (
-            <Table.Row key={item._id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell textAlign="center">{item.guests}</Table.Cell>
-              <Table.Cell textAlign="center">{item.phone}</Table.Cell>
-              <Table.Cell textAlign="center">
-                {format(new Date(item.arrival), "dd/MM/yy hh:mm a")}
-              </Table.Cell>
-              <Table.Cell textAlign="center">
-                <ViewDocsBtn docs={item.ids} />
-              </Table.Cell>
-            </Table.Row>
-          ))}
+          {data?.pages[(data.pageParams[0] as number) - 1].data.data.docs.map(
+            (item) => (
+              <Table.Row key={item._id}>
+                <Table.Cell>{item.name}</Table.Cell>
+                <Table.Cell textAlign="center">{item.guests}</Table.Cell>
+                <Table.Cell textAlign="center">{item.phone}</Table.Cell>
+                <Table.Cell textAlign="center">
+                  {format(new Date(item.arrival), "dd/MM/yy hh:mm a")}
+                </Table.Cell>
+                <Table.Cell textAlign="center">
+                  <ViewDocsBtn docs={item.ids} />
+                </Table.Cell>
+              </Table.Row>
+            )
+          )}
         </Table.Body>
       </Table.Root>
 

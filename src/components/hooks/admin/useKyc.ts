@@ -15,7 +15,7 @@ const adminGetKyc = new APIClient<PaginatedResponse<KYCResponse>>(
 const useAdminGetKYCs = () => {
   const { startDate, endDate, itemPerPage, slug } = useKYCQuery();
 
-  useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: ["getKyc", startDate, endDate, itemPerPage, slug],
     queryFn: ({ pageParam: page = 1 }) =>
       adminGetKyc({
@@ -24,6 +24,7 @@ const useAdminGetKYCs = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.data.data.hasNextPage ? lastPage.data.data.nextPage : undefined,
+    retry: 2,
   });
 };
 

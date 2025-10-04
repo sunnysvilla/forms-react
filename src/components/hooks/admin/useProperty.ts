@@ -14,14 +14,15 @@ const getProperty = new APIClient<PropertyResponse>(_adminGetProperty, "admin")
   .get;
 const useAdminGetProperty = () =>
   useQuery({
-    queryKey: [],
+    queryKey: ["properties"],
     queryFn: getProperty,
+    retry: 2,
   });
 
-const addProperty = new APIClient<Property>(_adminAddProperty, "user").openPost;
+const addProperty = new APIClient<Property>(_adminAddProperty, "admin").post;
 const useAddProperty = () => {
   return useMutation({
-    mutationFn: addProperty,
+    mutationFn: (data: Property) => addProperty(data),
     onSuccess: (data) =>
       toaster.create(toasterMaker("success", data.data.message)),
     onError: (err: ErrorResponse) =>
@@ -31,11 +32,11 @@ const useAddProperty = () => {
 
 const editProperty = new APIClient<Partial<Property>>(
   _adminEditProperty,
-  "user"
-).openPost;
+  "admin"
+).post;
 const useEditProperty = () => {
   return useMutation({
-    mutationFn: editProperty,
+    mutationFn: (data: Partial<Property>) => editProperty(data),
     onSuccess: (data) =>
       toaster.create(toasterMaker("success", data.data.message)),
     onError: (err: ErrorResponse) =>

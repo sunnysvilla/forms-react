@@ -52,7 +52,6 @@ const BoxInput = ({
       borderRadius="2xl"
       bg={`${activeColor}.50`}
       display="flex"
-      required
       justifyContent="space-between"
       border="1px solid"
       borderColor={`${activeColor}.100`}
