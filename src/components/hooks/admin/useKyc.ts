@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import APIClient from "../../services/api-client";
-import type { KYC, KYCResponse } from "../../entities/kyc";
+import type { AddKYC, KYCResponse } from "../../entities/kyc";
 import { _adminGetKyc, _submitKyc } from "../../services/endpoints";
 import toasterMaker from "../../helpers/toaster";
 import { toaster } from "../../ui/toaster";
@@ -28,10 +28,10 @@ const useAdminGetKYCs = () => {
   });
 };
 
-const submitKyc = new APIClient<KYC>(_submitKyc, "user").openPost;
+const submitKyc = new APIClient<AddKYC>(_submitKyc, "user").addProperty;
 const useSubmitKYC = () => {
   return useMutation({
-    mutationFn: submitKyc,
+    mutationFn: (val: AddKYC) => submitKyc(val),
     onSuccess: (data) =>
       toaster.create(toasterMaker("success", data.data.message)),
     onError: (err: ErrorResponse) =>

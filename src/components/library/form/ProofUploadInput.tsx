@@ -9,14 +9,14 @@ import Dropzone from "../../utils/Input/Dropzone";
 
 const ProofUploadInput = () => {
   const {
-    values: { proof, guestCount },
+    values: { pdf_file, guests },
     setFieldValue,
   } = useFormikContext<BookingFormValues>();
 
   const handleDelete = (file: File) => {
     setFieldValue(
-      "proof",
-      (proof || []).filter((pr) => pr && !areFilesSame(file, pr))
+      "pdf_file",
+      (pdf_file || []).filter((pr) => pr && !areFilesSame(file, pr))
     );
   };
 
@@ -24,15 +24,15 @@ const ProofUploadInput = () => {
     <BoxInput
       name="proof"
       label="Upload Proof"
-      extraButton={<Uploader max={guestCount} field="proof" />}
+      extraButton={<Uploader max={guests} field="pdf_file" />}
       children={
-        proof.length > 0 ? (
+        pdf_file.length > 0 ? (
           <ProofSlider
-            files={proof.filter((pr) => !!pr)}
+            files={pdf_file.filter((pr) => !!pr)}
             onDelete={handleDelete}
           />
         ) : (
-          <Dropzone max={guestCount} field="proof" />
+          <Dropzone max={guests} field="pdf_file" />
         )
       }
     />

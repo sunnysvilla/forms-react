@@ -5,11 +5,12 @@ import { TbConfetti } from "react-icons/tb";
 interface Props {
   tab: number;
   final: boolean;
+  isPending: boolean;
   prev: () => void;
   next: () => void;
 }
 
-const FormFooter = ({ tab, prev, next, final }: Props) => {
+const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
   return (
     <HStack w="100%" justify="center">
       {tab === 0 && (
@@ -56,6 +57,7 @@ const FormFooter = ({ tab, prev, next, final }: Props) => {
               colorPalette="purple"
               size={{ base: "sm", md: "md" }}
               px={6}
+              loading={isPending}
               type="submit"
             >
               Finish Booking

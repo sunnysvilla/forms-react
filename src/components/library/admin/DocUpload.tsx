@@ -1,6 +1,5 @@
 import { useFormikContext } from "formik";
 import type { PropertyFormValues } from "../../config/propertyConfig";
-import areFilesSame from "../../helpers/fileSame";
 import BoxInput from "../../utils/Input/BoxInput";
 import Dropzone from "../../utils/Input/Dropzone";
 import Uploader from "../../utils/Input/Uploader";
@@ -8,28 +7,22 @@ import ProofSlider from "../form/ProofSlider";
 
 const DocUpload = () => {
   const {
-    values: { docs },
+    values: { pdf_file },
     setFieldValue,
   } = useFormikContext<PropertyFormValues>();
 
-  const handleDelete = (file: File) => {
-    setFieldValue(
-      "docs",
-      (docs || []).filter((pr) => pr && !areFilesSame(file, pr))
-    );
+  const handleDelete = () => {
+    setFieldValue("pdf_file", "");
   };
 
   return (
     <BoxInput
       name="doc"
       label="Document"
-      extraButton={<Uploader max={1} field="docs" />}
+      extraButton={<Uploader max={1} field="pdf_file" />}
       children={
-        docs.length > 0 ? (
-          <ProofSlider
-            files={docs.filter((pr) => !!pr)}
-            onDelete={handleDelete}
-          />
+        pdf_file ? (
+          <ProofSlider files={[pdf_file]} onDelete={handleDelete} />
         ) : (
           <Dropzone max={1} field="docs" />
         )

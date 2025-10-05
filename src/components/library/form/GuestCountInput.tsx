@@ -13,9 +13,9 @@ const GuestCountInput = () => {
         bgImg="https://img.icons8.com/?size=100&id=5XxqJLUsepb2&format=png&color=000000"
       />
       <BoxInput
-        name="checkInTime"
-        label="Check In Time"
-        placeholder="Enter CheckIn"
+        name="arrival"
+        label="arrival"
+        placeholder="Enter Arrival Time"
         bgImg="https://img.icons8.com/?size=100&id=wOOmdWtwVs0A&format=png&color=000000"
       >
         <DatePicker />

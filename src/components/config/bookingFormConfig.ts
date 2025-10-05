@@ -2,22 +2,23 @@ import * as Yup from "yup";
 
 export const initialBookingValues = {
   name: "",
-  guestCount: 1,
+  guests: 1,
   phone: "",
-  checkInTime: "",
-  proof: [],
+  arrival: "",
+  slug: "",
+  pdf_file: [],
   period: "AM",
 };
 
 export const bookingValidation = Yup.object({
   name: Yup.string().required("Name is required"),
-  guestCount: Yup.number()
+  guests: Yup.number()
     .min(1, "Minium 1 guest is welcomed")
     .required("Guest count is required"),
   phone: Yup.string()
     .matches(/^[6-9]\d{9}$/, "Enter a valid phone number")
     .required("Phone number is required"),
-  checkInTime: Yup.string().required("Check-in time is required"),
+  arrival: Yup.string().required("Check-in time is required"),
   hours: Yup.number()
     .min(1, "Enter a valid hour")
     .max(12, "Enter a valid hour")
@@ -30,7 +31,7 @@ export const bookingValidation = Yup.object({
     .oneOf(["AM", "PM"], "Enter a valid period")
     .required("Period is required"),
 
-  proof: Yup.array()
+  pdf_file: Yup.array()
     .of(
       Yup.mixed<File>()
         .test("fileType", "Only PNG files are allowed", (file) =>
@@ -41,10 +42,7 @@ export const bookingValidation = Yup.object({
         )
     )
     .min(1, "At least 1 file is required")
-    .max(
-      Yup.ref("guestCount"),
-      "Number of proof files cannot exceed guest count"
-    )
+    .max(Yup.ref("guests"), "Number of proof files cannot exceed guest count")
     .required("Proof is required"),
 });
 

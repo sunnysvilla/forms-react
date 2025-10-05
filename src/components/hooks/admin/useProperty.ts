@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { Property, PropertyResponse } from "../../entities/property";
 import APIClient from "../../services/api-client";
 import {
@@ -19,12 +19,18 @@ const useAdminGetProperty = () =>
     retry: 2,
   });
 
-const addProperty = new APIClient<Property>(_adminAddProperty, "admin").post;
-const useAddProperty = () => {
+const addProperty = new APIClient<Property>(_adminAddProperty, "admin")
+  .addProperty;
+const useAddProperty = (callback: () => void) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (data: Property) => addProperty(data),
-    onSuccess: (data) =>
-      toaster.create(toasterMaker("success", data.data.message)),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["properties"] });
+      toaster.create(toasterMaker("success", data.data.message));
+      callback();
+    },
     onError: (err: ErrorResponse) =>
       toaster.create(toasterMaker("error", err.response?.data.error)),
   });

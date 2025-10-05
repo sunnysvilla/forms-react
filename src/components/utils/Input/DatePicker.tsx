@@ -52,7 +52,7 @@ const DatePicker = () => {
               <VStack>
                 <BoxInput
                   label="Date"
-                  name="checkInTime"
+                  name="arrival"
                   extraButton={
                     dateSelected && (
                       <Button
@@ -71,9 +71,9 @@ const DatePicker = () => {
                   {!dateSelected ? (
                     <Calendar
                       className="checkIn-picker"
-                      date={new Date(values["checkInTime"] || new Date())}
+                      date={new Date(values["arrival"] || new Date())}
                       onChange={(date) => {
-                        setFieldValue("checkInTime", date);
+                        setFieldValue("arrival", date);
                         isDateSelected(true);
                       }}
                       minDate={new Date()}

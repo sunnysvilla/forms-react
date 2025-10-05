@@ -135,6 +135,17 @@ export default class APIClient<T> {
     });
   };
 
+  addProperty = (data?: T, params?: AxiosRequestConfig) => {
+    return instance.post(this.endpoint, data, {
+      ...params,
+      headers: {
+        ...params?.headers,
+        Authorization: this.getToken(),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  };
+
   openPost = async (data?: T) => {
     return instance.post(this.endpoint, data).then((res) => res);
   };

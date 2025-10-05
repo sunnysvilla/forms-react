@@ -20,17 +20,32 @@ import BoxInput from "../../utils/Input/BoxInput";
 import DocUpload from "../admin/DocUpload";
 import { useAddProperty } from "../../hooks/admin/useProperty";
 import type { Property } from "../../entities/property";
+import { useState } from "react";
 
 interface Props {
   edit?: boolean;
   values?: Property;
+  reset?: () => void;
 }
 
-const AddPropertyBtn = ({ edit = false, values }: Props) => {
-  const { mutate, isPending } = useAddProperty();
+const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
+  const [open, setOpen] = useState(false);
 
+  const handleSuccess = () => {
+    if (reset) reset();
+    setOpen(false);
+  };
+
+  const { mutate, isPending } = useAddProperty(handleSuccess);
   return (
-    <Dialog.Root placement="center" motionPreset="slide-in-bottom" size="lg">
+    <Dialog.Root
+      placement="center"
+      motionPreset="slide-in-bottom"
+      size="lg"
+      lazyMount
+      open={open}
+      onOpenChange={(e) => setOpen(e.open)}
+    >
       <Dialog.Trigger asChild>
         {edit ? (
           <Button
@@ -73,6 +88,7 @@ const AddPropertyBtn = ({ edit = false, values }: Props) => {
                 initialValues={initialPropertyValues(values)}
                 validationSchema={propertyValidation}
                 onSubmit={(values) => {
+                  console.log("values", values);
                   mutate(values);
                 }}
               >

@@ -16,7 +16,9 @@ const Uploader = ({ field, max = 1 }: UploadProps) => {
       accept={["image/png"]}
       w="max"
       maxFiles={max}
-      onFileAccept={(details) => setFieldValue(field, details.files)}
+      onFileAccept={(details) =>
+        setFieldValue(field, max === 1 ? details.files[0] : details.files)
+      }
     >
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>

@@ -10,7 +10,7 @@ const GuestDetailsInput = () => {
         bgImg="https://img.icons8.com/?size=100&id=kPeBecos1GOu&format=png&color=000000"
       />
       <BoxInput
-        name="guestCount"
+        name="guests"
         label="Guest Count"
         placeholder="Ex. 5"
         type="number"

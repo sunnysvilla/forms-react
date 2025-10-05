@@ -13,6 +13,8 @@ import WelcomeScreen from "../library/form/WelcomeScreen";
 import ErrorModal from "../library/form/ErrorModal";
 import GuestDetailsInput from "../library/form/GuestDetailsInput";
 import FormTitle from "../library/form/FormTitle";
+import { useSubmitKYC } from "../hooks/admin/useKyc";
+import { useParams } from "react-router";
 
 const TABS = [
   WelcomeScreen,
@@ -42,18 +44,22 @@ const TAB_HEADINGS = [
 const FormLayout = () => {
   const [tab, setTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const { slug } = useParams();
 
   const next = () =>
     setTab((prev) => (prev < TABS.length - 1 ? prev + 1 : prev));
   const prev = () => setTab((prev) => (prev > 0 ? prev - 1 : 0));
   const ActiveTab = TABS[tab];
 
+  const { mutate, isPending } = useSubmitKYC();
+
   return (
     <Formik
       initialValues={initialBookingValues}
       validationSchema={bookingValidation}
       onSubmit={(values) => {
-        console.log("Form submitted:", values);
+        console.log(values);
+        if (slug) mutate({ ...values, slug });
       }}
     >
       {() => (
@@ -80,6 +86,7 @@ const FormLayout = () => {
                 <ActiveTab />
                 <FormFooter
                   tab={tab}
+                  isPending={isPending}
                   prev={prev}
                   next={next}
                   final={tab === TABS.length - 1}

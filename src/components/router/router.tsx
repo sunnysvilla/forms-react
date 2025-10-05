@@ -7,7 +7,7 @@ import KYCPage from "../pages/KYCPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/forms/:slug",
     element: <FormLayout />,
   },
   {
