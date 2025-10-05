@@ -11,7 +11,25 @@ import ViewDocsBtn from "./ViewDocsBtn";
 import { useAdminGetKYCs } from "../../hooks/admin/useKyc";
 
 const KYCTable = () => {
-  const { data } = useAdminGetKYCs();
+  const {
+    data,
+    hasNextPage,
+    hasPreviousPage,
+    fetchNextPage,
+    fetchPreviousPage,
+  } = useAdminGetKYCs();
+
+  console.log(
+    data?.pages[(data.pageParams[0] as number) - 1].data.data.totalPages
+  );
+
+  const handlePrev = () => {
+    if (hasPreviousPage) fetchPreviousPage();
+  };
+
+  const handleNext = () => {
+    if (hasNextPage) fetchNextPage();
+  };
 
   return (
     <Stack width="full" gap="5">
@@ -46,9 +64,18 @@ const KYCTable = () => {
         </Table.Body>
       </Table.Root>
 
-      <Pagination.Root count={items.length * 5} pageSize={5} page={1}>
+      <Pagination.Root
+        count={
+          (data?.pages[(data.pageParams[0] as number) - 1].data.data
+            .totalPages || 1) * 5
+        }
+        pageSize={
+          data?.pages[(data.pageParams[0] as number) - 1].data.data.limit
+        }
+        page={(data?.pageParams[0] as number) || 1}
+      >
         <ButtonGroup variant="ghost" size="sm" wrap="wrap">
-          <Pagination.PrevTrigger asChild>
+          <Pagination.PrevTrigger asChild onClick={handlePrev}>
             <IconButton>
               <LuChevronLeft />
             </IconButton>
@@ -62,7 +89,7 @@ const KYCTable = () => {
             )}
           />
 
-          <Pagination.NextTrigger asChild>
+          <Pagination.NextTrigger asChild onClick={handleNext}>
             <IconButton>
               <LuChevronRight />
             </IconButton>
@@ -74,45 +101,3 @@ const KYCTable = () => {
 };
 
 export default KYCTable;
-
-const items = [
-  {
-    _id: "68d8020d81ad60ae41be8b94",
-    name: "Dharshini",
-    phone: 9943980321,
-    guests: 2,
-    ids: [
-      "https://drive.google.com/file/d/1bjqGHKUV8gtlfPPWdSCLXfzHRaIt6YD-/view?usp=drivesdk",
-      "https://drive.google.com/file/d/1p9AO7qoUCQx22lhRErmIDbcLbjYzh6IG/view?usp=drivesdk",
-    ],
-    arrival: "2025-09-27T23:10:00.000Z",
-    property: "68d7f2d778bb1b5f57229098",
-    __v: 0,
-  },
-  {
-    _id: "68d80646dc6a34363fa58058",
-    name: "Dharshini",
-    phone: 9943980321,
-    guests: 2,
-    ids: [
-      "https://drive.google.com/file/d/11TMobCHEWDXKBJBAeLrlOwrbsNvWilHt/view?usp=drivesdk",
-      "https://drive.google.com/file/d/1oe43_-8PkaawqtwgAbaEPoExBGpADZ2Z/view?usp=drivesdk",
-    ],
-    arrival: "2025-09-27T00:00:00.000Z",
-    property: "68d7f2d778bb1b5f57229098",
-    __v: 0,
-  },
-  {
-    _id: "68d807ae238472caaa8cafd6",
-    name: "Dharshini",
-    phone: 9943980321,
-    guests: 2,
-    ids: [
-      "https://drive.google.com/file/d/1n-7cD4o9eBI8bjfwainbYi-stZnNLx2e/view?usp=drivesdk",
-      "https://drive.google.com/file/d/1Cuvh2Nx6kyEZWXGqHnA5awZog2Qa0DmE/view?usp=drivesdk",
-    ],
-    arrival: "2025-09-27T00:00:00.000Z",
-    property: "68d7f2d778bb1b5f57229098",
-    __v: 0,
-  },
-];
