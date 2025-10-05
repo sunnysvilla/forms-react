@@ -1,13 +1,15 @@
-import { Box, HStack, Icon } from "@chakra-ui/react";
+import { Box, HStack, Icon, VStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { LuX } from "react-icons/lu";
+import { LuCircleX } from "react-icons/lu";
+import { Label } from "../../utils/Typo/Label";
 
 interface CardProps {
   file: File;
   onDelete: (file: File) => void;
+  last?: boolean;
 }
 
-const ProofCard = ({ file, onDelete }: CardProps) => {
+const ProofCard = ({ file, onDelete, last = false }: CardProps) => {
   const [preview, setPreview] = useState<string>("");
 
   useEffect(() => {
@@ -17,32 +19,25 @@ const ProofCard = ({ file, onDelete }: CardProps) => {
   }, [file]);
 
   return (
-    <Box
-      w={200}
-      minW={240}
-      h={180}
-      p={4}
-      borderRadius="xl"
-      pos="relative"
-      bgImage={`url(${preview})`}
-      bgSize="cover"
-      bgPos="center"
+    <HStack
+      w="100%"
+      py={6}
+      borderBottom={last ? "none" : "1px solid"}
+      borderColor="gray.300"
     >
       <Box
-        p={1}
-        pos="absolute"
-        top={3}
-        right={3}
-        bg="white"
-        lineHeight={0}
-        w="max"
-        borderRadius="full"
-        cursor="pointer"
-        onClick={() => onDelete(file)}
-      >
-        <Icon as={LuX} size="xs" />
-      </Box>
-    </Box>
+        w={16}
+        h={12}
+        bg={`url(${preview})`}
+        bgSize="contain"
+        bgPos="center"
+        bgRepeat="no-repeat"
+        bgColor="white"
+        borderRadius="xl"
+      />
+      <Label> {file.name} </Label>
+      <Icon as={LuCircleX} color="red.400" onClick={() => onDelete(file)} />
+    </HStack>
   );
 };
 
@@ -53,11 +48,24 @@ interface Props {
 
 const ProofSlider = ({ files, onDelete }: Props) => {
   return (
-    <HStack w="100%" maxW="100%" overflowX="auto" minH="max" borderRadius="xl">
-      {files.map((file) => (
-        <ProofCard key={file.name} file={file} onDelete={onDelete} />
+    <VStack
+      mt={2}
+      w="100%"
+      maxW="100%"
+      overflowY="auto"
+      minH="max"
+      maxH={200}
+      borderRadius="xl"
+    >
+      {files.map((file, i) => (
+        <ProofCard
+          key={file.name}
+          file={file}
+          onDelete={onDelete}
+          last={i === files.length - 1}
+        />
       ))}
-    </HStack>
+    </VStack>
   );
 };
 

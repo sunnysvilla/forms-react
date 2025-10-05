@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 
 const FormHeader = () => {
-  return <Box w="98%" h={12} borderRadius="full" id="booking-header" />;
+  return <Box w="100%" h={1} borderTopRadius="full" id="booking-form" />;
 };
 
 export default FormHeader;

@@ -12,11 +12,11 @@ interface Props {
 
 const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
   return (
-    <HStack w="100%" justify="center">
+    <HStack w="100%" justify="center" px={8}>
       {tab === 0 && (
         <Button
           colorPalette="purple"
-          borderRadius="full"
+          borderRadius="xl"
           size={{ base: "md", md: "lg" }}
           onClick={next}
         >
@@ -29,7 +29,7 @@ const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
         <>
           <IconButton
             aria-label="Search database"
-            borderRadius="full"
+            borderRadius="xl"
             onClick={prev}
             variant="subtle"
             colorPalette="purple"
@@ -40,11 +40,12 @@ const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
 
           {!final && (
             <Button
-              borderRadius="full"
+              borderRadius="xl"
               onClick={next}
               colorPalette="purple"
               size={{ base: "sm", md: "md" }}
               px={6}
+              w="full"
             >
               Next
               <Icon as={LuCircleChevronRight} />
@@ -53,9 +54,10 @@ const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
 
           {final && (
             <Button
-              borderRadius="full"
+              borderRadius="xl"
               colorPalette="purple"
               size={{ base: "sm", md: "md" }}
+              w="100%"
               px={6}
               loading={isPending}
               type="submit"

@@ -10,30 +10,35 @@ interface Props {
 const FormContainer = ({ children }: Props) => {
   return (
     <Flex
-      w="100%"
-      maxW="100%"
-      flexDir="column"
-      align="center"
-      flexGrow={1}
-      justify="space-around"
-      pos="relative"
       p={4}
-      py={6}
       pb={0}
-      gap={4}
+      py={12}
+      gap={0}
+      w={500}
+      maxW={500}
+      flexDir="column"
+      flexGrow={1}
+      pos="relative"
       borderRadius={40}
-      className="glass-bg"
     >
       <FormHeader />
       <Flex
+        pt={6}
+        pb={52}
+        border="1px solid"
+        borderColor="gray.200"
+        px={8}
         flexDir="column"
-        gap={4}
+        className="glass-bg"
+        gap={8}
         w="100%"
         maxW="100%"
         justify="center"
         textAlign="left"
-        p={{ base: 4, md: 8 }}
-        borderRadius="20px"
+        borderBottomRadius="20px"
+        boxShadow="2xl"
+        backdropFilter="blur(10px)"
+        overflowY="clip"
       >
         {children}
       </Flex>

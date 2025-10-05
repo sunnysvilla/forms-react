@@ -1,13 +1,10 @@
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Text, VStack } from "@chakra-ui/react";
 
 const WelcomeScreen = () => {
   return (
-    <>
-      <Heading
-        fontWeight="medium"
-        fontSize={{ base: "2xl", sm: "4xl", md: "4xl" }}
-      >
-        <strong>Macify!</strong>
+    <VStack align="start" gap={4}>
+      <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="semibold">
+        Macify!
       </Heading>
 
       <Text fontSize={{ base: "sm", md: "md" }}>
@@ -15,7 +12,7 @@ const WelcomeScreen = () => {
         sint quia adipisci facilis consequuntur rem modi incidunt natus nobis
         molestiae.
       </Text>
-    </>
+    </VStack>
   );
 };
 

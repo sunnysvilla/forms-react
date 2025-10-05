@@ -1,26 +1,29 @@
-import { Formik, Form } from "formik";
 import { Flex } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
 import { useState } from "react";
-import FormContainer from "../library/form/FormContainer";
-import FormFooter from "../library/form/FormFooter";
-import GuestCountInput from "../library/form/GuestCountInput";
-import ProofUploadInput from "../library/form/ProofUploadInput";
+import { useParams } from "react-router";
 import {
   bookingValidation,
   initialBookingValues,
 } from "../config/bookingFormConfig";
-import WelcomeScreen from "../library/form/WelcomeScreen";
-import ErrorModal from "../library/form/ErrorModal";
-import GuestDetailsInput from "../library/form/GuestDetailsInput";
-import FormTitle from "../library/form/FormTitle";
 import { useSubmitKYC } from "../hooks/admin/useKyc";
-import { useParams } from "react-router";
+import ErrorModal from "../library/form/ErrorModal";
+import FormBg from "../library/form/FormBg";
+import FormContainer from "../library/form/FormContainer";
+import FormFooter from "../library/form/FormFooter";
+import FormTitle from "../library/form/FormTitle";
+import GuestCountInput from "../library/form/GuestCountInput";
+import GuestDetailsInput from "../library/form/GuestDetailsInput";
+import ProofUploadInput from "../library/form/ProofUploadInput";
+import WelcomeScreen from "../library/form/WelcomeScreen";
+import SuccessScreen from "../library/form/SuccessScreen";
 
 const TABS = [
   WelcomeScreen,
   GuestDetailsInput,
   GuestCountInput,
   ProofUploadInput,
+  SuccessScreen,
 ];
 const TAB_HEADINGS = [
   {
@@ -51,7 +54,7 @@ const FormLayout = () => {
   const prev = () => setTab((prev) => (prev > 0 ? prev - 1 : 0));
   const ActiveTab = TABS[tab];
 
-  const { mutate, isPending } = useSubmitKYC();
+  const { mutate, isPending, isSuccess, isIdle } = useSubmitKYC();
 
   return (
     <Formik
@@ -68,7 +71,6 @@ const FormLayout = () => {
           }
         });
 
-        // append uploaded files
         if (values.pdf_file && values.pdf_file.length > 0) {
           values.pdf_file.forEach((file) => {
             formData.append("pdf_file", file);
@@ -84,34 +86,42 @@ const FormLayout = () => {
       {() => (
         <Form>
           <Flex
-            id="booking-form"
+            id="form"
             w="100%"
             maxW="100%"
             overflowX="clip"
             minH="100vh"
             maxH="100vh"
             justify="center"
-            align="center"
             pos="relative"
           >
-            <Flex
-              w={{ base: "100%", sm: "80%", md: "60%", lg: "45%" }}
-              align="center"
-              justify="center"
-              flexDir="column"
-            >
-              <FormContainer tabIndex={tab}>
-                <FormTitle {...TAB_HEADINGS[tab]} />
-                <ActiveTab />
-                <FormFooter
-                  tab={tab}
-                  isPending={isPending}
-                  prev={prev}
-                  next={next}
-                  final={tab === TABS.length - 1}
-                />
-              </FormContainer>
-            </Flex>
+            <FormContainer tabIndex={tab}>
+              {isSuccess && (
+                <>
+                  <FormTitle
+                    title="Booking Successful"
+                    subtitle="Hooray, Let's celebrate together there!"
+                  />
+                  <SuccessScreen />
+                </>
+              )}
+
+              {(isIdle || isPending) && (
+                <>
+                  <FormTitle {...TAB_HEADINGS[tab]} />
+                  <ActiveTab />
+
+                  <FormFooter
+                    tab={tab}
+                    isPending={isPending}
+                    prev={prev}
+                    next={next}
+                    final={tab === TABS.length - 2}
+                  />
+                </>
+              )}
+              <FormBg tab={tab} />
+            </FormContainer>
           </Flex>
           <ErrorModal open={open} setOpen={setOpen} />
         </Form>

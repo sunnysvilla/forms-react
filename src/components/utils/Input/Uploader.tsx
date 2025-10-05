@@ -1,7 +1,7 @@
 import { Button, FileUpload } from "@chakra-ui/react";
 import { useFormikContext } from "formik";
-import { HiUpload } from "react-icons/hi";
 import { type BookingFormValues } from "../../config/bookingFormConfig";
+import { LuUpload } from "react-icons/lu";
 
 export interface UploadProps {
   field: string;
@@ -22,13 +22,8 @@ const Uploader = ({ field, max = 1 }: UploadProps) => {
     >
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>
-        <Button
-          variant="subtle"
-          colorPalette="green"
-          borderRadius="full"
-          size="sm"
-        >
-          <HiUpload /> Upload file
+        <Button borderRadius="xl" size="xs">
+          <LuUpload /> Upload file
         </Button>
       </FileUpload.Trigger>
     </FileUpload.Root>

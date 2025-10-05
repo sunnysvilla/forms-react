@@ -11,7 +11,7 @@ export interface KYCResponse {
 export interface AddKYC {
   name: string;
   phone: string;
-  guests: number;
+  guests: number | null;
   arrival: string;
   slug: string;
   pdf_file: File[];

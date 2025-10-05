@@ -9,6 +9,7 @@ const Dropzone = ({ max = 1, field }: UploadProps) => {
 
   return (
     <FileUpload.Root
+      mt={4}
       maxW="full"
       alignItems="stretch"
       maxFiles={max}

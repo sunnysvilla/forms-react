@@ -1,13 +1,13 @@
 import * as Yup from "yup";
+import type { AddKYC } from "../entities/kyc";
 
-export const initialBookingValues = {
+export const initialBookingValues: AddKYC = {
   name: "",
-  guests: 1,
+  guests: null,
   phone: "",
   arrival: "",
   slug: "",
   pdf_file: [],
-  period: "AM",
 };
 
 export const bookingValidation = Yup.object({
@@ -30,7 +30,14 @@ export const bookingValidation = Yup.object({
         )
     )
     .min(1, "At least 1 file is required")
-    .max(Yup.ref("guests"), "Number of proof files cannot exceed guest count")
+    .test(
+      "maxFiles",
+      "Number of proof files cannot exceed guest count",
+      function (files) {
+        const { guests } = this.parent;
+        return !files || !guests ? true : files.length <= guests;
+      }
+    )
     .required("Proof is required"),
 });
 
