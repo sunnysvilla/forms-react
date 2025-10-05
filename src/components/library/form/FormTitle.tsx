@@ -10,10 +10,12 @@ const FormTitle = ({ title, subtitle }: Props) => {
 
   return (
     <VStack w="100%" align="start" gap={0}>
-      <Heading fontSize={{ base: "xl", md: "xl" }} fontWeight="semibold">
+      <Heading fontSize={{ base: "xl", md: "2xl" }} fontWeight="semibold">
         {title}
       </Heading>
-      <Text fontSize="xs"> {subtitle} </Text>
+      <Text fontSize="xs" color="gray">
+        {subtitle}
+      </Text>
     </VStack>
   );
 };

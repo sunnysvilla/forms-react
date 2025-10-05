@@ -88,7 +88,6 @@ const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
                 initialValues={initialPropertyValues(values)}
                 validationSchema={propertyValidation}
                 onSubmit={(values) => {
-                  console.log("values", values);
                   mutate(values);
                 }}
               >

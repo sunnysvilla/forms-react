@@ -17,7 +17,7 @@ const Uploader = ({ field, max = 1 }: UploadProps) => {
       w="max"
       maxFiles={max}
       onFileAccept={(details) =>
-        setFieldValue(field, max === 1 ? details.files[0] : details.files)
+        setFieldValue(field, max === 1 ? [details.files[0]] : details.files)
       }
     >
       <FileUpload.HiddenInput />

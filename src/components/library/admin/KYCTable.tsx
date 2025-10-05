@@ -12,7 +12,6 @@ import { useAdminGetKYCs } from "../../hooks/admin/useKyc";
 
 const KYCTable = () => {
   const { data } = useAdminGetKYCs();
-  console.log(data);
 
   return (
     <Stack width="full" gap="5">

@@ -1,7 +1,6 @@
 import { useFormikContext } from "formik";
 import BoxInput from "../../utils/Input/BoxInput";
 import Uploader from "../../utils/Input/Uploader";
-// import Dropzone from "../../utils/Input/Dropzone";
 import { type BookingFormValues } from "../../config/bookingFormConfig";
 import ProofSlider from "./ProofSlider";
 import areFilesSame from "../../helpers/fileSame";
@@ -22,7 +21,7 @@ const ProofUploadInput = () => {
 
   return (
     <BoxInput
-      name="proof"
+      name="pdf_file"
       label="Upload Proof"
       extraButton={<Uploader max={guests} field="pdf_file" />}
       children={

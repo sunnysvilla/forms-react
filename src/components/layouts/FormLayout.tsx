@@ -58,8 +58,27 @@ const FormLayout = () => {
       initialValues={initialBookingValues}
       validationSchema={bookingValidation}
       onSubmit={(values) => {
-        console.log(values);
-        if (slug) mutate({ ...values, slug });
+        if (!slug) return;
+
+        const formData = new FormData();
+
+        Object.entries(values).forEach(([key, val]) => {
+          if (key !== "pdf_file" && !!val) {
+            formData.append(key, String(val));
+          }
+        });
+
+        // append uploaded files
+        if (values.pdf_file && values.pdf_file.length > 0) {
+          values.pdf_file.forEach((file) => {
+            formData.append("pdf_file", file);
+          });
+        }
+
+        formData.append("slug", slug);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        mutate(formData as any);
       }}
     >
       {() => (

@@ -1,11 +1,5 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  Image,
-  Portal,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Box, Button, Dialog, Portal, SimpleGrid } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 interface Props {
   docs: string[];
@@ -30,7 +24,9 @@ const ViewDocsBtn = ({ docs }: Props) => {
               <Box maxH={400} overflowY="auto">
                 <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
                   {docs.map((doc, i) => (
-                    <Image src={doc} alt={`image_${i}`} />
+                    <Link to={doc} target="_blank">
+                      {`View image_${i + 1}`}
+                    </Link>
                   ))}
                 </SimpleGrid>
               </Box>

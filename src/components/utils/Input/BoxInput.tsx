@@ -14,6 +14,8 @@ interface Props {
   viewOnly?: boolean;
   disabledInput?: boolean;
   type?: React.HTMLInputTypeAttribute;
+  topRadius?: string;
+  bottomRadius?: string;
 }
 
 const BoxInput = ({
@@ -27,13 +29,15 @@ const BoxInput = ({
   disabledInput = false,
   size = "md",
   type = "text",
+  topRadius = "2xl",
+  bottomRadius = "2xl",
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [field, meta, helpers] = useField(name);
 
   const isError = meta.touched && meta.error;
-  const isValid = !!meta.value;
+  const isValid = !meta.error && !!meta.value;
 
   const activeColor = isError ? "red" : isValid ? "green" : "gray";
 
@@ -49,7 +53,8 @@ const BoxInput = ({
       px={4}
       py={size == "sm" ? 2 : 4}
       gap={size == "sm" ? 1 : 2}
-      borderRadius="2xl"
+      borderTopRadius={topRadius}
+      borderBottomRadius={bottomRadius}
       bg={`${activeColor}.50`}
       display="flex"
       justifyContent="space-between"
