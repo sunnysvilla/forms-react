@@ -5,7 +5,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { Link, useLocation } from "react-router";
 
 const AdminHeader = () => {
-  const activeTab = useLocation().pathname.split("/")[2];
+  const activeTab = useLocation().pathname.split("/")[1];
   const showingProperty = !activeTab || activeTab === "properties";
 
   return (
@@ -23,7 +23,7 @@ const AdminHeader = () => {
         </HStack>
 
         <HStack gap={4}>
-          <Link to="/admin/properties">
+          <Link to="/properties">
             <Button
               borderRadius="xl"
               colorPalette={showingProperty ? "green" : "gray"}
@@ -34,7 +34,7 @@ const AdminHeader = () => {
             </Button>
           </Link>
 
-          <Link to="/admin/kycs">
+          <Link to="/kycs">
             <Button
               borderRadius="xl"
               colorPalette={!showingProperty ? "green" : "gray"}

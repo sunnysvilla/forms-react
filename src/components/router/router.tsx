@@ -4,25 +4,30 @@ import LoginPage from "../pages/LoginPage";
 import AdminLayout from "../layouts/AdminLayout";
 import PropertiesPage from "../pages/PropertiesPage";
 import KYCPage from "../pages/KYCPage";
+import { getSubdomain } from "../config/domainConfig";
+import { Heading } from "@chakra-ui/react";
 
-const router = createBrowserRouter([
-  {
-    path: "/forms/:slug",
-    element: <FormLayout />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/admin",
-    element: <AdminLayout />,
-    children: [
-      { index: true, element: <Navigate to="properties" /> },
-      { path: "properties", element: <PropertiesPage /> },
-      { path: "kycs", element: <KYCPage /> },
-    ],
-  },
-]);
+let router;
+const subdomain = getSubdomain();
+
+if (subdomain === "admin")
+  router = createBrowserRouter([
+    { path: "/login", element: <LoginPage /> },
+    {
+      path: "/",
+      element: <AdminLayout />,
+      children: [
+        { index: true, element: <Navigate to="properties" /> },
+        { path: "properties", element: <PropertiesPage /> },
+        { path: "kycs", element: <KYCPage /> },
+      ],
+    },
+  ]);
+else if (subdomain === "kyc")
+  router = createBrowserRouter([{ path: "/", element: <FormLayout /> }]);
+else
+  router = createBrowserRouter([
+    { path: "/*", element: <Heading> Not found </Heading> },
+  ]);
 
 export default router;

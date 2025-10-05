@@ -27,11 +27,7 @@ const LoginPage = () => {
           }}
         >
           <PageMiddleLayout>
-            <VStack
-              w={{ base: "80%", md: "50%", lg: "40%" }}
-              gap={8}
-              align="start"
-            >
+            <VStack w={400} gap={8} align="start">
               <VStack w="100%" align="start">
                 <HStack>
                   <Box minW={6} minH={6} bg="green.200" borderRadius="lg" />
@@ -40,13 +36,19 @@ const LoginPage = () => {
                 <Header level="h4">Welcome Back</Header>
               </VStack>
 
-              <VStack w="100%" mt={4}>
-                <BoxInput name="email" label="Email" size="sm" />
+              <VStack w="100%" mt={4} gap={1}>
+                <BoxInput
+                  name="email"
+                  label="Email"
+                  size="sm"
+                  bottomRadius="0"
+                />
                 <BoxInput
                   name="password"
                   label="Password"
                   size="sm"
                   type="password"
+                  topRadius="0"
                 />
                 <Button
                   w="100%"

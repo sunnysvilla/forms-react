@@ -22,7 +22,7 @@ const useAdminLogin = () => {
     onSuccess: (data: TokenResponse) => {
       localStorage.setItem(token_key["admin"], data.data.token);
       toaster.create(toasterMaker("success", data.data.message));
-      navigate("/admin");
+      navigate("/");
     },
     onError: (err: ErrorResponse) =>
       toaster.create(toasterMaker("error", err.response?.data.error)),
