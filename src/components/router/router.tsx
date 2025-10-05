@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter, Navigate, type Router as RemixRouter } from "react-router";
 import FormLayout from "../layouts/FormLayout";
 import LoginPage from "../pages/LoginPage";
 import AdminLayout from "../layouts/AdminLayout";
@@ -7,7 +7,7 @@ import KYCPage from "../pages/KYCPage";
 import { getSubdomain } from "../config/domainConfig";
 import { Heading } from "@chakra-ui/react";
 
-let router: Router;
+let router: RemixRouter;
 const subdomain = getSubdomain();
 
 if (subdomain === "admin")
