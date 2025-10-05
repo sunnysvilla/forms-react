@@ -1,12 +1,20 @@
-import { HStack, Icon, IconButton, SimpleGrid, VStack } from "@chakra-ui/react";
-import { LuFileArchive, LuTrash2 } from "react-icons/lu";
+import {
+  Button,
+  Clipboard,
+  HStack,
+  Icon,
+  IconButton,
+  SimpleGrid,
+  VStack,
+} from "@chakra-ui/react";
+import { LuTrash2 } from "react-icons/lu";
 import Caption from "../../utils/Typo/Caption";
 import { Label } from "../../utils/Typo/Label";
 import AddPropertyBtn from "../actionButtons/AddPropertyBtn";
-import type { Property } from "../../entities/property";
+import type { PropertyResponse } from "../../entities/property";
 import { useAdminGetProperty } from "../../hooks/admin/useProperty";
 
-const PropertyEntry = ({ property }: { property: Property }) => {
+const PropertyEntry = ({ property }: { property: PropertyResponse }) => {
   return (
     <VStack
       w="100%"
@@ -25,14 +33,26 @@ const PropertyEntry = ({ property }: { property: Property }) => {
 
       <HStack w="100%">
         <AddPropertyBtn edit values={property} />
-        <IconButton
+        <Clipboard.Root value={property.link}>
+          <Clipboard.Trigger asChild>
+            <Button
+              variant="surface"
+              size="sm"
+              borderRadius="xl"
+              colorPalette="yellow"
+            >
+              <Clipboard.Indicator />
+            </Button>
+          </Clipboard.Trigger>
+        </Clipboard.Root>
+        {/* <IconButton
           size="sm"
           borderRadius="xl"
-          colorPalette="yellow"
           variant="subtle"
-        >
+        > 
           <Icon as={LuFileArchive} />
         </IconButton>
+         */}
         <IconButton
           size="sm"
           borderRadius="xl"
