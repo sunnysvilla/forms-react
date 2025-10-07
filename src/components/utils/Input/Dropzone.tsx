@@ -9,6 +9,8 @@ const Dropzone = ({ max = 1, field, single }: UploadProps) => {
 
   return (
     <FileUpload.Root
+      disabled={max < 1}
+      cursor={max < 1 ? "disabled" : "auto"}
       mt={4}
       maxW="full"
       alignItems="stretch"

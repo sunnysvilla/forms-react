@@ -19,9 +19,12 @@ const KYCTable = () => {
     fetchPreviousPage,
   } = useAdminGetKYCs();
 
-  console.log(
-    data?.pages[(data.pageParams[0] as number) - 1].data.data.totalPages
-  );
+  const currentPageData = data?.pages[0]?.data?.data;
+
+  const currentPage = 1;
+  // const totalPages = currentPageData?.totalPages || 1;
+  const pageSize = currentPageData?.limit || 10;
+  const totalItems = currentPageData?.totalDocs || 0;
 
   const handlePrev = () => {
     if (hasPreviousPage) fetchPreviousPage();
@@ -46,33 +49,27 @@ const KYCTable = () => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data?.pages[(data.pageParams[0] as number) - 1].data.data.docs.map(
-            (item) => (
-              <Table.Row key={item._id}>
-                <Table.Cell>{item.name}</Table.Cell>
-                <Table.Cell textAlign="center">{item.guests}</Table.Cell>
-                <Table.Cell textAlign="center">{item.phone}</Table.Cell>
-                <Table.Cell textAlign="center">
-                  {format(new Date(item.arrival), "dd/MM/yy hh:mm a")}
-                </Table.Cell>
-                <Table.Cell textAlign="center">
-                  <ViewDocsBtn docs={item.ids} />
-                </Table.Cell>
-              </Table.Row>
-            )
-          )}
+          {currentPageData?.docs?.map((item) => (
+            <Table.Row key={item._id}>
+              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell textAlign="center">{item.guests}</Table.Cell>
+              <Table.Cell textAlign="center">{item.phone}</Table.Cell>
+              <Table.Cell textAlign="center">
+                {format(new Date(item.arrival), "dd/MM/yy hh:mm a")}
+              </Table.Cell>
+              <Table.Cell textAlign="center">
+                <ViewDocsBtn docs={item.ids} />
+              </Table.Cell>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table.Root>
 
       <Pagination.Root
-        count={
-          (data?.pages[(data.pageParams[0] as number) - 1].data.data
-            .totalPages || 1) * 5
-        }
-        pageSize={
-          data?.pages[(data.pageParams[0] as number) - 1].data.data.limit
-        }
-        page={(data?.pageParams[0] as number) || 1}
+        count={totalItems}
+        pageSize={pageSize}
+        page={currentPage}
+        siblingCount={1}
       >
         <ButtonGroup variant="ghost" size="sm" wrap="wrap">
           <Pagination.PrevTrigger asChild onClick={handlePrev}>

@@ -17,6 +17,7 @@ const useAdminGetProperty = () =>
     queryKey: ["properties"],
     queryFn: getProperty,
     retry: 2,
+    refetchOnWindowFocus: false,
   });
 
 const addProperty = new APIClient<Property>(_adminAddProperty, "admin")

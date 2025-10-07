@@ -9,16 +9,12 @@ const AdminHeader = () => {
   const showingProperty = !activeTab || activeTab === "properties";
 
   return (
-    <VStack borderRadius="xl" p={4} w="100%" bg="blue.50">
-      <VStack
-        w="100%"
-        align="start"
-        gap={8}
-        borderBottom="sm"
-        borderColor="gray.100"
-      >
+    <VStack borderTopRadius="2xl" p={4} w="100%" bg="gray.900">
+      <VStack w="100%" align="start" gap={8}>
         <HStack w="100%" justify="space-between">
-          <Header level="h6"> Macify </Header>
+          <Header level="h5" color="white">
+            Macify
+          </Header>
           <Box id="booking-header" w={6} h={6} borderRadius="full" />
         </HStack>
 

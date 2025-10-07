@@ -24,7 +24,7 @@ if (subdomain === "admin")
     },
   ]);
 else if (subdomain === "kyc")
-  router = createBrowserRouter([{ path: "/", element: <FormLayout /> }]);
+  router = createBrowserRouter([{ path: "/:slug", element: <FormLayout /> }]);
 else
   router = createBrowserRouter([
     { path: "/*", element: <Heading> Not found </Heading> },

@@ -1,6 +1,7 @@
 import {
   Button,
   HStack,
+  Icon,
   Popover,
   Portal,
   Spinner,
@@ -11,10 +12,12 @@ import { useAdminGetProperty } from "../../hooks/admin/useProperty";
 import { useState } from "react";
 import { DateRange, type Range, type RangeKeyDict } from "react-date-range";
 import useKYCQuery from "../../store/kycQuery";
+import { format } from "date-fns";
+import { LuCircleX } from "react-icons/lu";
 
 const KYCFilterStack = () => {
   const { data, status, fetchStatus } = useAdminGetProperty();
-  const { setStartDate, setEndDate } = useKYCQuery();
+  const { startDate, endDate, setStartDate, setEndDate } = useKYCQuery();
 
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<Range[]>([
@@ -44,7 +47,21 @@ const KYCFilterStack = () => {
       <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
         <Popover.Trigger asChild>
           <Button variant="subtle" borderRadius="xl">
-            Range
+            {startDate && endDate
+              ? `${format(new Date(startDate), "dd/MM/yy")} - 
+                ${format(new Date(endDate), "dd/MM/yy")}`
+              : "Range"}
+            {startDate && endDate && (
+              <Icon
+                as={LuCircleX}
+                boxSize={4}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setStartDate("");
+                  setEndDate("");
+                }}
+              />
+            )}
           </Button>
         </Popover.Trigger>
         <Portal>

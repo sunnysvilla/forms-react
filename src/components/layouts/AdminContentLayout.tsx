@@ -16,14 +16,14 @@ const AdminContentLayout = ({ title, subtitle, children, action }: Props) => {
       w="100%"
       h={400}
       overflowY="auto"
-      borderRadius="xl"
+      borderBottomRadius="2xl"
       border="1px solid"
-      borderColor="gray.100"
+      borderColor="gray.200"
       bg="gray.50"
       p={{ base: 4, md: 8 }}
       gap={8}
     >
-      <HStack w="100%" justify="space-between">
+      <HStack w="100%" justify="space-between" flexWrap="wrap">
         <VStack align="start" gap={0}>
           <Header level="h4"> {title} </Header>
           <Label> {subtitle} </Label>

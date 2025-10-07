@@ -4,13 +4,12 @@ const WelcomeScreen = () => {
   return (
     <VStack align="start" gap={4}>
       <Heading fontSize={{ base: "2xl", md: "3xl" }} fontWeight="semibold">
-        Macify!
+        Sunnys Group
       </Heading>
 
       <Text fontSize={{ base: "sm", md: "md" }}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto
-        sint quia adipisci facilis consequuntur rem modi incidunt natus nobis
-        molestiae.
+        Welcome to your stay! Upload your ID to complete verification and enjoy
+        a trusted, hassle-free check-in.
       </Text>
     </VStack>
   );

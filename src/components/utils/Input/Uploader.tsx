@@ -14,12 +14,14 @@ const Uploader = ({ field, max = 1, single = false }: UploadProps) => {
 
   return (
     <FileUpload.Root
+      disabled={max < 1}
       accept={["image/png"]}
       w="max"
       maxFiles={max}
-      onFileAccept={(details) =>
-        setFieldValue(field, single ? details.files[0] : details.files)
-      }
+      onFileAccept={(details) => {
+        console.log(details);
+        setFieldValue(field, single ? details.files[0] : details.files);
+      }}
     >
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>

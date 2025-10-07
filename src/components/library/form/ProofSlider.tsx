@@ -63,7 +63,7 @@ const ProofCard = ({ file, onDelete, last = false }: CardProps) => {
 };
 
 interface Props {
-  files: File[];
+  files: Array<string | File | undefined>;
   onDelete: (file: File) => void;
 }
 
@@ -78,14 +78,16 @@ const ProofSlider = ({ files, onDelete }: Props) => {
       maxH={200}
       borderRadius="xl"
     >
-      {files.map((file, i) => (
-        <ProofCard
-          key={file.name}
-          file={file}
-          onDelete={onDelete}
-          last={i === files.length - 1}
-        />
-      ))}
+      {files
+        .filter((file) => file !== undefined)
+        .map((file, i) => (
+          <ProofCard
+            key={i}
+            file={file}
+            onDelete={onDelete}
+            last={i === files.length - 1}
+          />
+        ))}
     </VStack>
   );
 };
