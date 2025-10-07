@@ -6,9 +6,10 @@ import { LuUpload } from "react-icons/lu";
 export interface UploadProps {
   field: string;
   max?: number;
+  single?: boolean;
 }
 
-const Uploader = ({ field, max = 1 }: UploadProps) => {
+const Uploader = ({ field, max = 1, single = false }: UploadProps) => {
   const { setFieldValue } = useFormikContext<BookingFormValues>();
 
   return (
@@ -17,7 +18,7 @@ const Uploader = ({ field, max = 1 }: UploadProps) => {
       w="max"
       maxFiles={max}
       onFileAccept={(details) =>
-        setFieldValue(field, max === 1 ? [details.files[0]] : details.files)
+        setFieldValue(field, single ? details.files[0] : details.files)
       }
     >
       <FileUpload.HiddenInput />

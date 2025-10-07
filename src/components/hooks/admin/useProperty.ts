@@ -36,15 +36,22 @@ const useAddProperty = (callback: () => void) => {
   });
 };
 
-const editProperty = new APIClient<Partial<Property>>(
-  _adminEditProperty,
-  "admin"
-).post;
-const useEditProperty = () => {
+const editProperty = (id: string, data: Partial<Property>) =>
+  new APIClient<Partial<Property>>(`${_adminEditProperty}/${id}`, "admin").put(
+    data
+  );
+
+const useEditProperty = (id: string, callback: () => void) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (data: Partial<Property>) => editProperty(data),
-    onSuccess: (data) =>
-      toaster.create(toasterMaker("success", data.data.message)),
+    mutationFn: (data: Partial<Property>) => editProperty(id, data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["properties"] });
+
+      toaster.create(toasterMaker("success", data.data.message));
+      callback();
+    },
     onError: (err: ErrorResponse) =>
       toaster.create(toasterMaker("error", err.response?.data.error)),
   });

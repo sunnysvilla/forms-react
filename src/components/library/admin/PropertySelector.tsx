@@ -1,10 +1,16 @@
 import { Combobox, useFilter, useListCollection } from "@chakra-ui/react";
+import type { Property } from "../../entities/property";
 
-const PropertySelector = () => {
+const PropertySelector = ({ properties }: { properties: Property[] }) => {
   const { contains } = useFilter({ sensitivity: "base" });
 
   const { collection, filter } = useListCollection({
-    initialItems: frameworks,
+    initialItems: properties.map((property) => {
+      return {
+        label: property.name,
+        value: property.name,
+      };
+    }),
     filter: contains,
   });
 
@@ -41,17 +47,3 @@ const PropertySelector = () => {
 };
 
 export default PropertySelector;
-
-const frameworks = [
-  { label: "React", value: "react" },
-  { label: "Solid", value: "solid" },
-  { label: "Vue", value: "vue" },
-  { label: "Angular", value: "angular" },
-  { label: "Svelte", value: "svelte" },
-  { label: "Preact", value: "preact" },
-  { label: "Qwik", value: "qwik" },
-  { label: "Lit", value: "lit" },
-  { label: "Alpine.js", value: "alpinejs" },
-  { label: "Ember", value: "ember" },
-  { label: "Next.js", value: "nextjs" },
-];

@@ -18,13 +18,13 @@ import {
 } from "../../config/propertyConfig";
 import BoxInput from "../../utils/Input/BoxInput";
 import DocUpload from "../admin/DocUpload";
-import { useAddProperty } from "../../hooks/admin/useProperty";
-import type { Property } from "../../entities/property";
+import { useAddProperty, useEditProperty } from "../../hooks/admin/useProperty";
+import type { PropertyResponse } from "../../entities/property";
 import { useState } from "react";
 
 interface Props {
   edit?: boolean;
-  values?: Property;
+  values?: PropertyResponse;
   reset?: () => void;
 }
 
@@ -36,7 +36,12 @@ const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
     setOpen(false);
   };
 
-  const { mutate, isPending } = useAddProperty(handleSuccess);
+  const { mutate: add, isPending: isAdding } = useAddProperty(handleSuccess);
+  const { mutate: update, isPending: isUpdating } = useEditProperty(
+    values?._id || "",
+    handleSuccess
+  );
+
   return (
     <Dialog.Root
       placement="center"
@@ -76,8 +81,10 @@ const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
           <Dialog.Content w={{ base: "95%" }} borderRadius="2xl">
             <Dialog.Header>
               <Stack gap={0}>
-                <Dialog.Title>Add Property</Dialog.Title>
-                <Text color="gray">Please select enter & click "Add"</Text>
+                <Dialog.Title>{edit ? "Edit" : "Add"} Property</Dialog.Title>
+                <Text color="gray">
+                  {`Please select enter & click ${edit ? `"Update"` : `"Add"`}`}
+                </Text>
               </Stack>
               <Dialog.CloseTrigger asChild>
                 <CloseButton size="sm" />
@@ -88,28 +95,49 @@ const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
                 initialValues={initialPropertyValues(values)}
                 validationSchema={propertyValidation}
                 onSubmit={(values) => {
-                  mutate(values);
+                  const updatedVal = {
+                    name: values.name,
+                    mail: values.mail,
+                    pdf_file: values.pdf_file,
+                  };
+
+                  if (edit) update(updatedVal);
+                  else add(updatedVal);
                 }}
               >
                 {() => (
                   <Form>
-                    <VStack>
-                      <SimpleGrid w="100%" columns={{ base: 1, md: 2 }} gap={2}>
-                        <BoxInput name="name" label="Name" size="sm" />
-                        <BoxInput name="mail" label="Mail" size="sm" />
+                    <VStack gap={1}>
+                      <SimpleGrid w="100%" columns={{ base: 1, md: 2 }} gap={1}>
+                        <BoxInput
+                          name="name"
+                          label="Name"
+                          size="sm"
+                          bottomRadius="0"
+                        />
+                        <BoxInput
+                          name="mail"
+                          label="Mail"
+                          size="sm"
+                          bottomRadius="0"
+                        />
                       </SimpleGrid>
                       <DocUpload />
                       <HStack mt={4}>
-                        <Button borderRadius="xl" variant="surface">
+                        <Button
+                          borderRadius="xl"
+                          variant="surface"
+                          onClick={() => setOpen(false)}
+                        >
                           Cancel
                         </Button>
                         <Button
                           type="submit"
-                          loading={isPending}
+                          loading={isAdding || isUpdating}
                           borderRadius="xl"
                           colorPalette="green"
                         >
-                          Add Property
+                          {edit ? "Update" : "Add"} Property
                         </Button>
                       </HStack>
                     </VStack>

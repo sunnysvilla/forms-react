@@ -10,12 +10,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { LuCircleX, LuListFilter } from "react-icons/lu";
-import BoxInputWrapper from "../admin/BoxInputWrapper";
-import PropertySelector from "../admin/PropertySelector";
-import DateFilter from "../admin/DateFilter";
-import useKYCQuery from "../../store/kycQuery";
 import { format } from "date-fns";
+import { LuCircleX, LuListFilter } from "react-icons/lu";
+import useKYCQuery from "../../store/kycQuery";
+import BoxInputWrapper from "../admin/BoxInputWrapper";
+import DateFilter from "../admin/DateFilter";
 
 const FilterKYCBtn = () => {
   const {
@@ -55,11 +54,6 @@ const FilterKYCBtn = () => {
             </Dialog.Header>
             <Dialog.Body py={4}>
               <VStack align="start" gap={8}>
-                <VStack w="50%">
-                  <BoxInputWrapper label="Property">
-                    <PropertySelector />
-                  </BoxInputWrapper>
-                </VStack>
                 <SimpleGrid w="100%" gap={4} columns={{ base: 1, md: 2 }}>
                   <BoxInputWrapper label="Start Date">
                     <DateFilter

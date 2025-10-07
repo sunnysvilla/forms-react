@@ -17,14 +17,15 @@ const DocUpload = () => {
 
   return (
     <BoxInput
-      name="doc"
+      topRadius="0"
+      name="pdf_file"
       label="Document"
-      extraButton={<Uploader max={1} field="pdf_file" />}
+      extraButton={<Uploader max={1} field="pdf_file" single />}
       children={
         pdf_file ? (
           <ProofSlider files={[pdf_file]} onDelete={handleDelete} />
         ) : (
-          <Dropzone max={1} field="docs" />
+          <Dropzone max={1} field="pdf_file" single />
         )
       }
     />
