@@ -29,7 +29,13 @@ const PropertySelector = ({
       <Select.Label />
 
       <Select.Control>
-        <Select.Trigger rounded="xl">
+        <Select.Trigger
+          bg="teal.subtle"
+          color="teal.300"
+          borderColor="teal.900"
+          fontWeight="semibold"
+          rounded="xl"
+        >
           <Select.ValueText />
         </Select.Trigger>
         <Select.IndicatorGroup>

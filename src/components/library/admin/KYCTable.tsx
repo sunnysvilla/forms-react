@@ -39,7 +39,7 @@ const KYCTable = () => {
 
   return (
     <Table.ScrollArea w="full" h="100%" borderWidth="1px" rounded="xl">
-      <Table.Root size="sm" stickyHeader h="100%">
+      <Table.Root size="md" stickyHeader h="100%">
         <Table.Header>
           <Table.Row bg="bg.subtle">
             <Table.ColumnHeader textAlign="center">Name</Table.ColumnHeader>

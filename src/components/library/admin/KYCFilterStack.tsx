@@ -47,7 +47,7 @@ const KYCFilterStack = () => {
             colorPalette="bg"
             variant="surface"
             borderRadius="xl"
-            // loading={status === "pending" || fetchStatus === "fetching"}
+            loading={status === "pending" || fetchStatus === "fetching"}
             loadingText="Just a moment"
           >
             {startDate && endDate
