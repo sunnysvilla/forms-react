@@ -18,7 +18,7 @@ const useKYCQuery = create<KYCQuery & KYCSetQuery>((set) => ({
   startDate: "",
   endDate: "",
   slug: "",
-  itemPerPage: 3,
+  itemPerPage: 4,
 
   setStartDate: (date) => set({ startDate: String(date) }),
   setEndDate: (date) => set({ endDate: String(date) }),

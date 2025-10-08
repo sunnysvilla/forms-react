@@ -25,6 +25,7 @@ const useAdminGetKYCs = () => {
     getNextPageParam: (lastPage) =>
       lastPage.data.data.hasNextPage ? lastPage.data.data.nextPage : undefined,
     retry: 2,
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -32,8 +33,19 @@ const submitKyc = new APIClient<AddKYC>(_submitKyc, "user").addProperty;
 const useSubmitKYC = () => {
   return useMutation({
     mutationFn: (val: AddKYC) => submitKyc(val),
-    onSuccess: (data) =>
-      toaster.create(toasterMaker("success", data.data.message)),
+    onSuccess: (data) => {
+      toaster.create(toasterMaker("success", data.data.message));
+
+      const url = data.data.data;
+      if (url) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "sunnys_villa_document";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+    },
     onError: (err: ErrorResponse) =>
       toaster.create(toasterMaker("error", err.response?.data.error)),
   });
