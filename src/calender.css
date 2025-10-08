@@ -1,0 +1,77 @@
+.rdrCalendarWrapper {
+  background: #121212 !important;
+  color: #fff !important;
+  border-radius: 0.6rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.rdrDateDisplayWrapper {
+  background-color: rgb(27, 27, 27);
+}
+
+.rdrDateInput {
+  background-color: rgb(0, 0, 0);
+}
+
+.rdrMonth {
+  background: #121212 !important;
+}
+
+.rdrWeekDays {
+  color: #aaa !important;
+  font-weight: 500;
+}
+
+.rdrDay {
+  color: #e0e0e0 !important;
+  background: transparent !important;
+}
+
+.rdrNextPrevButton {
+  background: #2d2d2d;
+}
+.rdrNextPrevButton i {
+  color: white !important;
+}
+
+.rdrMonthPicker select,
+.rdrYearPicker select {
+  background-color: #1b1b1b !important;
+  border-radius: 10px;
+  color: white !important;
+
+  -webkit-appearance: none; /* For Safari and Chrome */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* Standard property */
+}
+
+.rdrDayDisabled {
+  color: #555 !important;
+}
+
+.rdrDayNumber span {
+  color: #e0e0e0 !important;
+}
+
+.rdrDayToday .rdrDayNumber span {
+  color: #1de9b6 !important;
+  font-weight: bold;
+}
+
+.rdrSelected,
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  background: #036e53 !important;
+  color: #000 !important;
+}
+
+.rdrStaticRangeLabel {
+  color: #aaa !important;
+}
+
+.rdrStaticRange:hover .rdrStaticRangeLabel {
+  background: #1de9b6 !important;
+  color: #000 !important;
+}

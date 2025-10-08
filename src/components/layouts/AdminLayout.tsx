@@ -6,7 +6,17 @@ import AdminHeader from "../pages/AdminHeader";
 const AdminLayout = () => {
   return (
     <PageMiddleLayout>
-      <VStack w="100%" maxW={800} className="glass-bg" gap={1}>
+      <VStack
+        w="100%"
+        h="100%"
+        maxW={800}
+        gap={0}
+        bg="gray.900"
+        borderRadius={20}
+        boxShadow="lg"
+        border="1px solid"
+        borderColor="gray.800"
+      >
         <AdminHeader />
         <Outlet />
       </VStack>

@@ -15,7 +15,8 @@ const PageMiddleLayout = ({
       minH="100vh"
       overflow={clip ? "clip" : "auto"}
       pos="relative"
-      py={20}
+      px={{ base: 2, md: 0 }}
+      py={{ base: 2, md: 20 }}
     >
       {children}
     </VStack>

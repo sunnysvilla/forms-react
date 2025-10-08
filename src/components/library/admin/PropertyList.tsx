@@ -8,11 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { LuTrash2 } from "react-icons/lu";
-import Caption from "../../utils/Typo/Caption";
 import { Label } from "../../utils/Typo/Label";
 import AddPropertyBtn from "../actionButtons/AddPropertyBtn";
 import type { PropertyResponse } from "../../entities/property";
 import { useAdminGetProperty } from "../../hooks/admin/useProperty";
+import Header from "../../utils/Typo/Heading";
 
 const PropertyEntry = ({ property }: { property: PropertyResponse }) => {
   return (
@@ -20,15 +20,15 @@ const PropertyEntry = ({ property }: { property: PropertyResponse }) => {
       w="100%"
       gap={16}
       p={4}
-      bg="purple.100"
-      borderRadius="xl"
-      border="sm"
-      borderColor="purple.200"
+      bg="gray.800"
+      borderRadius="2xl"
       align="start"
     >
       <VStack align="start" gap={0} flex={1}>
-        <Caption> {property.name} </Caption>
-        <Label color="gray"> {property.mail} </Label>
+        <Header color="teal" level="h5">
+          {property.name}
+        </Header>
+        <Label color="gray.400"> {property.mail} </Label>
       </VStack>
 
       <HStack w="100%">
@@ -36,7 +36,7 @@ const PropertyEntry = ({ property }: { property: PropertyResponse }) => {
         <Clipboard.Root value={property.link}>
           <Clipboard.Trigger asChild>
             <Button
-              variant="surface"
+              variant="subtle"
               size="sm"
               borderRadius="xl"
               colorPalette="yellow"
@@ -45,14 +45,6 @@ const PropertyEntry = ({ property }: { property: PropertyResponse }) => {
             </Button>
           </Clipboard.Trigger>
         </Clipboard.Root>
-        {/* <IconButton
-          size="sm"
-          borderRadius="xl"
-          variant="subtle"
-        > 
-          <Icon as={LuFileArchive} />
-        </IconButton>
-         */}
         <IconButton
           size="sm"
           borderRadius="xl"

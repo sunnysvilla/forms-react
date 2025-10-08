@@ -1,5 +1,4 @@
 import { Box, Button, Dialog, Portal, SimpleGrid } from "@chakra-ui/react";
-import { Link } from "react-router";
 
 interface Props {
   docs: string[];
@@ -7,26 +6,34 @@ interface Props {
 
 const ViewDocsBtn = ({ docs }: Props) => {
   return (
-    <Dialog.Root>
+    <Dialog.Root size="xl">
       <Dialog.Trigger asChild>
-        <Button size="sm" borderRadius="lg">
+        <Button size="sm" borderRadius="xl">
           View
         </Button>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content borderRadius="xl">
+          <Dialog.Content
+            borderRadius="3xl"
+            outline="none"
+            border="none"
+            boxShadow="none"
+          >
             <Dialog.Header>
               <Dialog.Title>Documents</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <Box maxH={400} overflowY="auto">
-                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+              <Box maxH={400} w="100%" overflowY="auto">
+                <SimpleGrid w="100%" columns={{ base: 1, md: 2 }} gap={4}>
                   {docs.map((doc, i) => (
-                    <Link to={doc} target="_blank">
-                      {`View image_${i + 1}`}
-                    </Link>
+                    <iframe
+                      key={i}
+                      src={doc}
+                      allow="autoplay; encrypted-media"
+                      title="Check-in Instructions"
+                    />
                   ))}
                 </SimpleGrid>
               </Box>

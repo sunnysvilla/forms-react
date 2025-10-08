@@ -59,11 +59,12 @@ const TimePicker = ({ label }: Props) => {
 
       <Portal>
         <Menu.Positioner>
-          <Menu.Content maxH="300px" overflowY="auto" p={1}>
+          <Menu.Content borderRadius="xl" maxH="300px" overflowY="auto" p={1}>
             {timeOptions.map((time) => (
               <Menu.Item
                 key={time}
                 value={time}
+                borderRadius="lg"
                 onClick={() => handleSelectTime(time)}
               >
                 {time}

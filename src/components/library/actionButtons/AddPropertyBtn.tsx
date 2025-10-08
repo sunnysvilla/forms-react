@@ -51,15 +51,9 @@ const AddPropertyBtn = ({ edit = false, values, reset }: Props) => {
       open={open}
       onOpenChange={(e) => setOpen(e.open)}
     >
-      <Dialog.Trigger asChild>
+      <Dialog.Trigger asChild w="max" ml="auto">
         {edit ? (
-          <Button
-            size="sm"
-            borderRadius="xl"
-            colorPalette="blue"
-            variant="subtle"
-            flex={1}
-          >
+          <Button size="sm" borderRadius="xl" variant="surface" flex={1}>
             <Icon as={LuPencil} />
             Edit
           </Button>

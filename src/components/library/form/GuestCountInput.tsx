@@ -32,7 +32,6 @@ const GuestCountInput = () => {
         <SimpleGrid w="100%" columns={2} gap={4}>
           <DateFilter
             variant="surface"
-            placement="right"
             date={arrival ? new Date(arrival) : new Date()}
             label={
               arrival ? format(new Date(arrival), "dd/MM/yyyy") : "Arrival Date"

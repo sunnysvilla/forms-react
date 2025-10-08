@@ -8,6 +8,7 @@ const PropertiesPage = () => {
       title="Properties"
       subtitle="Manage your properties here."
       action={<AddPropertyBtn />}
+      sameLine
     >
       <PropertyList />
     </AdminContentLayout>

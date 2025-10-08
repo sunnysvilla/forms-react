@@ -25,11 +25,11 @@ const FormContainer = ({ children }: Props) => {
       <Flex
         pt={6}
         pb={52}
+        bg="gray.900"
         border="1px solid"
-        borderColor="gray.200"
+        borderColor="gray.800"
         px={8}
         flexDir="column"
-        className="glass-bg"
         gap={8}
         w="100%"
         maxW="100%"

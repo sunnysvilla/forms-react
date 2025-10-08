@@ -5,8 +5,14 @@ import { useAdminGetKYCs } from "../../hooks/admin/useKyc";
 import ViewDocsBtn from "./ViewDocsBtn";
 
 const KYCTable = () => {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useAdminGetKYCs();
+  const {
+    data,
+    isFetching,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useAdminGetKYCs();
   const loaderRef = useRef(null);
 
   // Intersection Observer: triggers when sentinel div (loaderRef) enters view
@@ -32,11 +38,11 @@ const KYCTable = () => {
     data?.pages.flatMap((page) => page.data?.data?.docs || []) ?? [];
 
   return (
-    <Table.ScrollArea w="full" h="100%" borderWidth="1px" rounded="md">
+    <Table.ScrollArea w="full" h="100%" borderWidth="1px" rounded="xl">
       <Table.Root size="sm" stickyHeader h="100%">
         <Table.Header>
           <Table.Row bg="bg.subtle">
-            <Table.ColumnHeader>Name</Table.ColumnHeader>
+            <Table.ColumnHeader textAlign="center">Name</Table.ColumnHeader>
             <Table.ColumnHeader textAlign="center">
               Guest Count
             </Table.ColumnHeader>
@@ -49,7 +55,7 @@ const KYCTable = () => {
         <Table.Body>
           {allDocs.map((item) => (
             <Table.Row key={item._id}>
-              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell textAlign="center">{item.name}</Table.Cell>
               <Table.Cell textAlign="center">{item.guests}</Table.Cell>
               <Table.Cell textAlign="center">{item.phone}</Table.Cell>
               <Table.Cell textAlign="center">
@@ -65,7 +71,7 @@ const KYCTable = () => {
           <Table.Row>
             <Table.Cell colSpan={5} textAlign="center">
               <Box ref={loaderRef} py={4}>
-                {isFetchingNextPage ? (
+                {isFetchingNextPage || isFetching || isLoading ? (
                   <Spinner size="sm" />
                 ) : hasNextPage ? (
                   "Scroll to load more…"

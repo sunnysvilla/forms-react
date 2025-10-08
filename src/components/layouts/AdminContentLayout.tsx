@@ -1,4 +1,4 @@
-import { HStack, VStack } from "@chakra-ui/react";
+import { SimpleGrid, VStack } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import Header from "../utils/Typo/Heading";
 import { Label } from "../utils/Typo/Label";
@@ -8,28 +8,38 @@ interface Props {
   subtitle: string;
   children: ReactNode | ReactNode[];
   action: ReactNode | ReactNode[];
+  sameLine?: boolean;
 }
 
-const AdminContentLayout = ({ title, subtitle, children, action }: Props) => {
+const AdminContentLayout = ({
+  title,
+  subtitle,
+  children,
+  action,
+  sameLine = false,
+}: Props) => {
   return (
     <VStack
       w="100%"
-      h={400}
+      flex={1}
+      // h={{ base: "100%", md: 400 }}
       overflowY="auto"
-      borderBottomRadius="2xl"
-      border="1px solid"
-      borderColor="gray.200"
-      bg="gray.50"
-      p={{ base: 4, md: 8 }}
+      p={{ base: 6, md: 8 }}
       gap={8}
     >
-      <HStack w="100%" justify="space-between" flexWrap="wrap">
+      <SimpleGrid
+        w="100%"
+        columns={{ base: sameLine ? 2 : 1, md: 2 }}
+        rowGap={4}
+      >
         <VStack align="start" gap={0}>
-          <Header level="h4"> {title} </Header>
-          <Label> {subtitle} </Label>
+          <Header level="h4" color="white">
+            {title}
+          </Header>
+          <Label color="gray"> {subtitle} </Label>
         </VStack>
         {action}
-      </HStack>
+      </SimpleGrid>
       {children}
     </VStack>
   );

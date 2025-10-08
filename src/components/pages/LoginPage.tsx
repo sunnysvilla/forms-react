@@ -27,7 +27,12 @@ const LoginPage = () => {
           }}
         >
           <PageMiddleLayout>
-            <VStack w={400} gap={8} align="start">
+            <VStack
+              w={400}
+              gap={8}
+              align="start"
+              px={{ base: 4, sm: 2, md: 0 }}
+            >
               <VStack w="100%" align="start">
                 <HStack>
                   <Box minW={6} minH={6} bg="green.200" borderRadius="lg" />

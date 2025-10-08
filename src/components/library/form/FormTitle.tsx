@@ -13,7 +13,7 @@ const FormTitle = ({ title, subtitle }: Props) => {
       <Heading fontSize={{ base: "xl", md: "2xl" }} fontWeight="semibold">
         {title}
       </Heading>
-      <Text fontSize="xs" color="gray">
+      <Text fontSize="xs" color="gray.400">
         {subtitle}
       </Text>
     </VStack>

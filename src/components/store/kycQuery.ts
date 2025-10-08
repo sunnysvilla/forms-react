@@ -15,8 +15,8 @@ interface KYCSetQuery {
 }
 
 const useKYCQuery = create<KYCQuery & KYCSetQuery>((set) => ({
-  startDate: "",
-  endDate: "",
+  startDate: new Date().toLocaleString(),
+  endDate: new Date().toLocaleString(),
   slug: "",
   itemPerPage: 4,
 

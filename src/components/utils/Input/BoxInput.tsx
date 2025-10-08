@@ -55,11 +55,11 @@ const BoxInput = ({
       gap={size == "sm" ? 1 : 2}
       borderTopRadius={topRadius}
       borderBottomRadius={bottomRadius}
-      bg={`${activeColor}.50`}
+      bg={`${activeColor}.800`}
       display="flex"
       justifyContent="space-between"
       border="1px solid"
-      borderColor={`${activeColor}.100`}
+      borderColor={`${activeColor}.700`}
       onClick={handleTap}
       onFocus={() => setIsActive(true)}
       onBlur={() => setIsActive(false)}

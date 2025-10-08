@@ -9,21 +9,21 @@ const AdminHeader = () => {
   const showingProperty = !activeTab || activeTab === "properties";
 
   return (
-    <VStack borderTopRadius="2xl" p={4} w="100%" bg="gray.900">
-      <VStack w="100%" align="start" gap={8}>
+    <VStack p={{ base: 6, md: 8 }} w="100%">
+      <VStack w="100%" align="start" gap={4}>
         <HStack w="100%" justify="space-between">
-          <Header level="h5" color="white">
+          <Header level="h4" color="white">
             Macify
           </Header>
           <Box id="booking-header" w={6} h={6} borderRadius="full" />
         </HStack>
 
-        <HStack gap={4}>
+        <HStack gap={2}>
           <Link to="/properties">
             <Button
               borderRadius="xl"
-              colorPalette={showingProperty ? "green" : "gray"}
-              variant={showingProperty ? "solid" : "surface"}
+              colorPalette="teal"
+              variant={showingProperty ? "solid" : "subtle"}
             >
               <LuBuilding />
               Properties
@@ -33,8 +33,8 @@ const AdminHeader = () => {
           <Link to="/kycs">
             <Button
               borderRadius="xl"
-              colorPalette={!showingProperty ? "green" : "gray"}
-              variant={!showingProperty ? "solid" : "surface"}
+              colorPalette="teal"
+              variant={!showingProperty ? "solid" : "subtle"}
             >
               <FaPeopleGroup />
               KYCs

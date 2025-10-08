@@ -4,7 +4,6 @@ import {
   Icon,
   Popover,
   Portal,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import PropertySelector from "./PropertySelector";
@@ -22,8 +21,8 @@ const KYCFilterStack = () => {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<Range[]>([
     {
-      startDate: new Date(),
-      endDate: undefined,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       key: "selection",
     },
   ]);
@@ -36,21 +35,25 @@ const KYCFilterStack = () => {
     setOpen(false);
   };
 
-  if (status === "pending" || fetchStatus === "fetching") return <Spinner />;
-
   return (
-    <HStack>
+    <HStack w="100%" align="end" justify="end">
       {status === "success" && fetchStatus === "idle" && (
         <PropertySelector properties={data.data.data} />
       )}
 
       <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
         <Popover.Trigger asChild>
-          <Button variant="subtle" borderRadius="xl">
+          <Button
+            colorPalette="bg"
+            variant="surface"
+            borderRadius="xl"
+            // loading={status === "pending" || fetchStatus === "fetching"}
+            loadingText="Just a moment"
+          >
             {startDate && endDate
               ? `${format(new Date(startDate), "dd/MM/yy")} - 
                 ${format(new Date(endDate), "dd/MM/yy")}`
-              : "Range"}
+              : "Select Range"}
             {startDate && endDate && (
               <Icon
                 as={LuCircleX}
@@ -66,9 +69,9 @@ const KYCFilterStack = () => {
         </Popover.Trigger>
         <Portal>
           <Popover.Positioner>
-            <Popover.Content borderRadius="xl" minW="max">
+            <Popover.Content borderRadius="2xl" minW="max">
               <Popover.Arrow />
-              <Popover.Body>
+              <Popover.Body p={2}>
                 <VStack gap={0}>
                   <DateRange
                     editableDateInputs={true}
@@ -79,6 +82,7 @@ const KYCFilterStack = () => {
                     ranges={state}
                   />
                   <Button
+                    mt={3}
                     alignSelf="end"
                     size="sm"
                     borderRadius="lg"
