@@ -7,7 +7,7 @@ import KYCPage from "../pages/KYCPage";
 import { getSubdomain } from "../config/domainConfig";
 import { Heading } from "@chakra-ui/react";
 
-let router: any;
+let router: ReturnType<typeof createBrowserRouter>;
 const subdomain = getSubdomain();
 
 if (subdomain === "admin")
