@@ -1,8 +1,9 @@
-import { Box, Button, HStack, VStack } from "@chakra-ui/react";
-import Header from "../utils/Typo/Heading";
-import { LuBuilding } from "react-icons/lu";
+import { Button, HStack, VStack } from "@chakra-ui/react";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { LuBuilding } from "react-icons/lu";
 import { Link, useLocation } from "react-router";
+import AdminMenu from "../library/admin/AdminMenu";
+import Header from "../utils/Typo/Heading";
 
 const AdminHeader = () => {
   const activeTab = useLocation().pathname.split("/")[1];
@@ -15,7 +16,7 @@ const AdminHeader = () => {
           <Header level="h4" color="white">
             Macify
           </Header>
-          <Box id="booking-header" w={6} h={6} borderRadius="full" />
+          <AdminMenu />
         </HStack>
 
         <HStack gap={2}>

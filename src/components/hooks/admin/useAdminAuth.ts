@@ -39,7 +39,7 @@ const useAdminChangePassword = (callback: () => void) => {
       toaster.create(
         toasterMaker("success", "Please login with your new password!")
       );
-      navigate("/login/admin");
+      navigate("/login");
       callback();
       localStorage.setItem(token_key["admin"], data.data.token);
     },

@@ -9,16 +9,24 @@ import {
 import type { ErrorResponse } from "../../entities/response";
 import toasterMaker from "../../helpers/toaster";
 import { toaster } from "../../ui/toaster";
+import useKYCQuery from "../../store/kycQuery";
 
 const getProperty = new APIClient<PropertyResponse>(_adminGetProperty, "admin")
   .get;
-const useAdminGetProperty = () =>
-  useQuery({
+const useAdminGetProperty = () => {
+  const { setSlug } = useKYCQuery();
+
+  return useQuery({
     queryKey: ["properties"],
-    queryFn: getProperty,
+    queryFn: () =>
+      getProperty().then((res) => {
+        setSlug(res.data.data[0].slug);
+        return res;
+      }),
     retry: 2,
     refetchOnWindowFocus: false,
   });
+};
 
 const addProperty = new APIClient<Property>(_adminAddProperty, "admin")
   .addProperty;

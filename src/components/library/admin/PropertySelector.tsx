@@ -1,29 +1,29 @@
 import { createListCollection, Select } from "@chakra-ui/react";
-import { useState } from "react";
 import type { PropertyResponse } from "../../entities/property";
+import useKYCQuery from "../../store/kycQuery";
 
 const PropertySelector = ({
   properties,
 }: {
   properties: PropertyResponse[];
 }) => {
+  const { slug, setSlug } = useKYCQuery();
+
   const propertyOptions = createListCollection({
     items: properties.map((property) => {
       return {
         label: property.name,
-        value: property._id,
+        value: property.slug,
       };
     }),
   });
-
-  const [value, setValue] = useState(properties[0]._id);
 
   return (
     <Select.Root
       w="300px"
       collection={propertyOptions}
-      value={[value]}
-      onValueChange={(e) => setValue(e.value[0])}
+      value={[slug]}
+      onValueChange={(e) => setSlug(e.value[0])}
     >
       <Select.HiddenSelect />
       <Select.Label />

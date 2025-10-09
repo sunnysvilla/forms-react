@@ -2,22 +2,24 @@ import {
   Button,
   HStack,
   Icon,
+  IconButton,
   Popover,
   Portal,
   VStack,
 } from "@chakra-ui/react";
-import PropertySelector from "./PropertySelector";
-import { useAdminGetProperty } from "../../hooks/admin/useProperty";
+import { format } from "date-fns";
 import { useState } from "react";
 import { DateRange, type Range, type RangeKeyDict } from "react-date-range";
+import { LuCalendarMinus, LuCalendarPlus, LuCircleX } from "react-icons/lu";
+import { useAdminGetProperty } from "../../hooks/admin/useProperty";
 import useKYCQuery from "../../store/kycQuery";
-import { format } from "date-fns";
-import { LuCircleX } from "react-icons/lu";
+import PropertySelector from "./PropertySelector";
 
 const KYCFilterStack = () => {
   const { data, status, fetchStatus } = useAdminGetProperty();
   const { startDate, endDate, setStartDate, setEndDate } = useKYCQuery();
 
+  const [months, setMonths] = useState(1);
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<Range[]>([
     {
@@ -74,6 +76,9 @@ const KYCFilterStack = () => {
               <Popover.Body p={2}>
                 <VStack gap={0}>
                   <DateRange
+                    showPreview
+                    months={months}
+                    direction="horizontal"
                     editableDateInputs={true}
                     onChange={(item: RangeKeyDict) =>
                       setState([item.selection])
@@ -81,15 +86,28 @@ const KYCFilterStack = () => {
                     moveRangeOnFirstSelection={false}
                     ranges={state}
                   />
-                  <Button
-                    mt={3}
-                    alignSelf="end"
-                    size="sm"
-                    borderRadius="lg"
-                    onClick={applyDateFilter}
-                  >
-                    Apply
-                  </Button>
+
+                  <HStack w="100%" justify="end" align="end">
+                    <IconButton
+                      rounded="xl"
+                      size="sm"
+                      variant="surface"
+                      onClick={() => setMonths((prev) => (prev === 1 ? 2 : 1))}
+                    >
+                      <Icon
+                        as={months === 1 ? LuCalendarPlus : LuCalendarMinus}
+                      />
+                    </IconButton>
+                    <Button
+                      mt={3}
+                      alignSelf="end"
+                      size="sm"
+                      rounded="xl"
+                      onClick={applyDateFilter}
+                    >
+                      Apply
+                    </Button>
+                  </HStack>
                 </VStack>
               </Popover.Body>
             </Popover.Content>

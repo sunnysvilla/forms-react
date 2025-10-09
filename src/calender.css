@@ -23,8 +23,13 @@
   font-weight: 500;
 }
 
-.rdrDay {
+.rdrDay:not(.rdrDayPassive) {
   color: #e0e0e0 !important;
+  background: transparent !important;
+}
+
+.rdrDayPassive .rdrDayNumber span {
+  color: rgb(134, 134, 134) !important;
   background: transparent !important;
 }
 
