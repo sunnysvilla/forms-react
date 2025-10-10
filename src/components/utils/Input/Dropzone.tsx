@@ -4,7 +4,7 @@ import type { UploadProps } from "./Uploader";
 import { useFormikContext } from "formik";
 import type { BookingFormValues } from "../../config/bookingFormConfig";
 
-const Dropzone = ({ max = 1, field, single, accept = ["*/*"] }: UploadProps) => {
+const Dropzone = ({ max = 1, field, single }: UploadProps) => {
   const { setFieldValue } = useFormikContext<BookingFormValues>();
 
   return (
@@ -15,7 +15,6 @@ const Dropzone = ({ max = 1, field, single, accept = ["*/*"] }: UploadProps) => 
       maxW="full"
       alignItems="stretch"
       maxFiles={max}
-      accept={accept} 
       onFileAccept={(details) =>
         setFieldValue(field, single ? details.files[0] : details.files)
       }
