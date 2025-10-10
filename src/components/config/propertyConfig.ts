@@ -24,14 +24,14 @@ export const propertyValidation = Yup.object({
       if (typeof value === "string") return true;
 
       // Otherwise, validate the file type
-      return value ? value.type === "image/png" : false;
+      return value ? value.type === "application/pdf" || value.type === "image/png" || value.type === "image/jpeg" || value.type === "image/jpg" : false;
     })
-    .test("fileSize", "Each file must be <= 2MB", (value) => {
+    .test("fileSize", "Each file must be <= 10MB", (value) => {
       // Skip if it's a string (existing file)
       if (typeof value === "string") return true;
 
       // Validate size if it's a new file
-      return value ? value.size <= 2 * 1024 * 1024 : false;
+      return value ? value.size <= 10 * 1024 * 1024 : false;
     })
     .required("Proof is required"),
 });
