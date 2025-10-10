@@ -23,7 +23,7 @@ const ProofUploadInput = () => {
     <BoxInput
       name="pdf_file"
       label="Upload Proof"
-      extraButton={<Uploader max={guests} field="pdf_file" accept="*/*" />}
+      extraButton={<Uploader max={guests} field="pdf_file" />}
       children={
         pdf_file.length > 0 ? (
           <ProofSlider
@@ -31,7 +31,7 @@ const ProofUploadInput = () => {
             onDelete={handleDelete}
           />
         ) : (
-          <Dropzone max={guests} field="pdf_file" accept="*/*" />
+          <Dropzone max={guests} field="pdf_file" />
         )
       }
     />
