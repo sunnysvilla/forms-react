@@ -15,7 +15,7 @@ const Uploader = ({ field, max = 1, single = false }: UploadProps) => {
   return (
     <FileUpload.Root
       disabled={max < 1}
-      accept={["image/png"]}
+      accept={["*/*"]}
       w="max"
       maxFiles={max}
       onFileAccept={(details) => {
