@@ -23,7 +23,7 @@ export const bookingValidation = Yup.object({
     .of(
       Yup.mixed<File>()
         .test("fileType", "Only PNG files are allowed", (file) =>
-          file ? file.type === "application/pdf" || file.type === "image/png" || file.type === "image/jpeg" ||file.type === "image/jpg   : true
+          file ? file.type === "application/pdf" || file.type === "image/png" || file.type === "image/jpeg" ||file.type === "image/jpg"   : true
         )
         .test("fileSize", "Each file must be <= 2MB", (file) =>
           file ? file.size <= 2 * 1024 * 1024 : true
