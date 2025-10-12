@@ -1,16 +1,16 @@
 import { Button, HStack, Icon, IconButton } from "@chakra-ui/react";
 import { LuCircleChevronLeft, LuCircleChevronRight } from "react-icons/lu";
 import { TbConfetti } from "react-icons/tb";
+import type { ReactNode } from "react";
 
 interface Props {
   tab: number;
-  final: boolean;
-  isPending: boolean;
   prev: () => void;
   next: () => void;
+  submitButton: ReactNode;
 }
 
-const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
+const FormFooter = ({ tab, prev, next, submitButton }: Props) => {
   return (
     <HStack w="100%" justify="center" px={8}>
       {tab === 0 && (
@@ -38,7 +38,7 @@ const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
             <LuCircleChevronLeft />
           </IconButton>
 
-          {!final && (
+          {submitButton || (
             <Button
               borderRadius="xl"
               onClick={next}
@@ -48,21 +48,6 @@ const FormFooter = ({ tab, prev, next, final, isPending }: Props) => {
               w="full"
             >
               Next
-              <Icon as={LuCircleChevronRight} />
-            </Button>
-          )}
-
-          {final && (
-            <Button
-              borderRadius="xl"
-              colorPalette="purple"
-              size={{ base: "sm", md: "md" }}
-              w="100%"
-              px={6}
-              loading={isPending}
-              type="submit"
-            >
-              Finish Booking
               <Icon as={LuCircleChevronRight} />
             </Button>
           )}

@@ -9,4 +9,4 @@ export const _adminGetProperty = "/admin/property/getAll";
 export const _adminGetKyc = "/kyc/get";
 
 // ===== User =====  //
-export const _submitKyc = "/kyc/submit";
+export const _submitKyc = "/kyc/submt";

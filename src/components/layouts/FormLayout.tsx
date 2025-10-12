@@ -7,7 +7,6 @@ import {
   initialBookingValues,
 } from "../config/bookingFormConfig";
 import { useSubmitKYC } from "../hooks/admin/useKyc";
-import ErrorModal from "../library/form/ErrorModal";
 import FormBg from "../library/form/FormBg";
 import FormContainer from "../library/form/FormContainer";
 import FormFooter from "../library/form/FormFooter";
@@ -17,6 +16,7 @@ import GuestDetailsInput from "../library/form/GuestDetailsInput";
 import ProofUploadInput from "../library/form/ProofUploadInput";
 import WelcomeScreen from "../library/form/WelcomeScreen";
 import SuccessScreen from "../library/form/SuccessScreen";
+import ReviewModal from "../library/form/ReviewModal";
 
 const TABS = [
   WelcomeScreen,
@@ -46,7 +46,6 @@ const TAB_HEADINGS = [
 
 const FormLayout = () => {
   const [tab, setTab] = useState(0);
-  const [open, setOpen] = useState(false);
   const { slug } = useParams();
 
   const next = () =>
@@ -113,17 +112,19 @@ const FormLayout = () => {
 
                   <FormFooter
                     tab={tab}
-                    isPending={isPending}
                     prev={prev}
                     next={next}
-                    final={tab === TABS.length - 2}
+                    submitButton={
+                      tab === TABS.length - 2 ? (
+                        <ReviewModal setTab={setTab} loading={isPending} />
+                      ) : null
+                    }
                   />
                 </>
               )}
               <FormBg tab={tab} />
             </FormContainer>
           </Flex>
-          <ErrorModal open={open} setOpen={setOpen} />
         </Form>
       )}
     </Formik>

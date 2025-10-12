@@ -1,7 +1,14 @@
-import { Button, Menu, Portal } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Menu,
+  Portal,
+} from "@chakra-ui/react";
 import { useFormikContext } from "formik";
 import { useState, useMemo } from "react";
 import { type BookingFormValues } from "../../config/bookingFormConfig";
+import { LuClock } from "react-icons/lu";
 
 interface Props {
   label: string;
@@ -51,10 +58,15 @@ const TimePicker = ({ label }: Props) => {
       onOpenChange={(e) => setOpen(e.open)}
       positioning={{ placement: "bottom-start" }}
     >
-      <Menu.Trigger asChild>
-        <Button w="full" variant="surface" borderRadius="xl">
-          {formattedTime || label}
-        </Button>
+      <Menu.Trigger w="full" asChild>
+        <ButtonGroup w="full" variant="surface" borderRadius="xl" attached>
+          <Button flex={1} variant="surface" borderRadius="xl">
+            {formattedTime || label}
+          </Button>
+          <IconButton variant="surface" borderRadius="xl">
+            <LuClock />
+          </IconButton>
+        </ButtonGroup>
       </Menu.Trigger>
 
       <Portal>

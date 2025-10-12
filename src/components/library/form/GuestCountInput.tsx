@@ -29,7 +29,14 @@ const GuestCountInput = () => {
         topRadius="0"
         bgImg="https://img.icons8.com/?size=100&id=wOOmdWtwVs0A&format=png&color=000000"
       >
-        <SimpleGrid w="100%" columns={2} gap={4}>
+        <SimpleGrid
+          w="100%"
+          columns={{
+            base: 1,
+            md: arrival ? 2 : 1,
+          }}
+          gap={4}
+        >
           <DateFilter
             variant="surface"
             date={arrival ? new Date(arrival) : new Date()}
@@ -40,7 +47,7 @@ const GuestCountInput = () => {
               setFieldValue("arrival", String(date));
             }}
           />
-          <TimePicker label="Select Time" />
+          {arrival && <TimePicker label="Select Time" />}
         </SimpleGrid>
       </BoxInput>
     </VStack>

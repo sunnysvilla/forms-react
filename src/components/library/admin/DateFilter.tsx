@@ -1,11 +1,14 @@
 import {
   Button,
+  ButtonGroup,
+  IconButton,
   Popover,
   Portal,
   type ConditionalValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Calendar } from "react-date-range";
+import { LuCalendar } from "react-icons/lu";
 
 interface Props {
   label: string;
@@ -35,9 +38,14 @@ const DateFilter = ({
       onOpenChange={(e) => setOpen(e.open)}
     >
       <Popover.Trigger asChild>
-        <Button w="full" variant={variant} borderRadius="xl">
-          {label}
-        </Button>
+        <ButtonGroup w="full" variant={variant} borderRadius="xl" attached>
+          <Button flex={1} variant={variant} borderRadius="xl">
+            {label}
+          </Button>
+          <IconButton variant={variant} borderRadius="xl">
+            <LuCalendar />
+          </IconButton>
+        </ButtonGroup>
       </Popover.Trigger>
       <Portal>
         <Popover.Positioner>
