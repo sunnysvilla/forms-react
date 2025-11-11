@@ -23,8 +23,8 @@ const KYCFilterStack = () => {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<Range[]>([
     {
-      startDate: new Date(startDate),
-      endDate: new Date(endDate),
+      startDate: new Date(startDate || new Date()),
+      endDate: new Date(endDate || new Date()),
       key: "selection",
     },
   ]);
